@@ -1,0 +1,110 @@
+import { createStyles } from 'antd-style'
+
+import bg from '../../assets/images/bg.jpg'
+
+export default createStyles(({ token, css }) => ({
+  container: {
+    height: '100vh',
+    position: 'relative',
+    backgroundImage: `url(${bg})`,
+    backgroundSize: 'cover'
+  },
+  dialog: {
+    width: 450,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    borderRadius: 10,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  form: {
+    position: 'relative',
+    maxWidth: '100%',
+    padding: '30px 50px',
+    overflow: 'hidden',
+  },
+  formItem: {
+    paddingRight: 0,
+    margin: '20px 0',
+    color: '#454545',
+    background: 'transparent',
+    border: '1px solid transparent',
+    borderRadius: 2,
+  },
+  input: {
+    height: 50,
+    fontSize: token.fontSize,
+    color: token.colorText,
+    background: '#f6f4fc',
+    border: 0,
+    caretColor: token.colorText,
+  },
+  titleTips: {
+    lineHeight: '23px',
+    marginTop: 29,
+    fontSize: 20,
+    fontWeight: 400,
+    color: 'rgba(14, 18, 26, 1)',
+    textAlign: 'center',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
+  loginBtn: {
+    width: '100%',
+    height: 50,
+    marginTop: 5,
+    // border: 0,
+  },
+  waveContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+  },
+  wave: {
+    position: 'relative',
+    marginBottom: -7,
+    width: '100%',
+    minHeight: 133,
+    maxHeight: 200,
+  },
+  parallax: css`
+    @keyframes move-forever {
+      0% {
+        transform: translate3d(-90px, 0, 0);
+      }
+      100% {
+        transform: translate3d(85px, 0, 0);
+      }
+    }
+
+    & > use {
+      animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5)
+      infinite;
+    }
+
+    /* 選擇一個use */
+    & > use:nth-child(1) {
+      /* 延遲2S執行 */
+      animation-delay: -2s;
+      /* 7s內執行完畢 */
+      animation-duration: 7s;
+    }
+
+    & > use:nth-child(2) {
+      animation-delay: -3s;
+      animation-duration: 10s;
+    }
+
+    & > use:nth-child(3) {
+      animation-delay: -4s;
+      animation-duration: 13s;
+    }
+
+    & > use:nth-child(4) {
+      animation-delay: -5s;
+      animation-duration: 20s;
+    }
+  `, // 背景色
+}))

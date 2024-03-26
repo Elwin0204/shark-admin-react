@@ -1,34 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { Suspense } from 'react'
+import { ConfigProvider } from 'antd'
+import zhCN from 'antd/es/locale/zh_CN'
+import 'antd/dist/reset.css'
 import './App.css'
+import { useSettingStore } from '@stores/index'
+import RouterGuard from '@components/RouterGuard'
+import SkLoading from '@components/SkLoading'
+import useThemeStore from '@stores/modules/theme'
+import { ThemeProvider } from 'antd-style'
+import type { ThemeState } from '@stores/modules/theme'
 
-function App() {
-  const [count, setCount] = useState(0)
+// 通过给 antd-style 扩展 CustomToken 对象类型定义，可以为 useTheme 中增加相应的 token 对象
+declare module 'antd-style' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  export interface CustomToken extends ThemeState {}
+}
 
+const App: React.FC = () => {
+  const { primaryColor } = useSettingStore()
+  const customToken = useThemeStore()
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <ThemeProvider<ThemeState> customToken={{ ...customToken }}>
+      <ConfigProvider
+        locale={zhCN}
+        theme={{
+          token: { colorPrimary: primaryColor },
+        }}
+      >
+        <Suspense fallback={<SkLoading />}>
+          <RouterGuard />
+        </Suspense>
+      </ConfigProvider>
+    </ThemeProvider>
   )
 }
 
