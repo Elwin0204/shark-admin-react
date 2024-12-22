@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 
 export default createStyles(({ token, css }) => {
-  const { baseTopBarHeight, baseTabsBarHeight, baseZindex, baseNavBarHeight, baseColorWhite, baseBoxShadow, basePadding, baseLeftMenuWidth, baseTransition } = token
+  const { baseTopBarHeight, baseTabsBarHeight, baseZindex, baseNavBarHeight, baseColorWhite, baseBoxShadow, basePadding, baseLeftMenuWidth, baseTransition, baseRightContentWidth, baseLeftMenuWidthMin } = token
   return {
     sharkAdminWrapper: css`
       position: relative;
@@ -81,6 +81,40 @@ export default createStyles(({ token, css }) => {
           margin-left: ${baseLeftMenuWidth}px;
           background: #f6f8f9;
           transition: ${baseTransition};
+
+          .fixed-header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: ${baseLeftMenuWidth}px;
+            z-index: ${baseZindex} - 2;
+            width: ${baseRightContentWidth()};
+            box-shadow: ${baseBoxShadow};
+            transition: ${baseTransition};
+            overflow: hidden;
+          }
+
+          .nav-bar-container {
+            position: relative;
+            box-sizing: border-box;
+          }
+
+          .tabs-bar-container {
+            box-sizing: border-box;
+          }
+
+          .app-main-container {
+            background: ${baseColorWhite};
+          }
+
+          &.is-collapse-main {
+            margin-left: ${baseLeftMenuWidthMin}px;
+
+            .fixed-header {
+              left: ${baseLeftMenuWidthMin}px;
+              width: calc(100% - 65px);
+            }
+          }
         }
       }
 

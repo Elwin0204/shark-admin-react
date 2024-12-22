@@ -1,98 +1,123 @@
-import { useEffect } from 'react'
-import { useLocation, useNavigate, useRoutes } from 'react-router-dom'
-import { useUserStore, useRoutesStore } from '@stores/index'
-import { constantRoutes, asyncRoutes, CustomRoute } from '@router/index'
-import SkProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-import settings from '@config/index'
+import { useEffect } from 'react';
+import { useLocation, useNavigate, useRoutes } from 'react-router-dom';
+import { useUserStore, useRoutesStore } from '@stores/index';
+import { constantRoutes, asyncRoutes, CustomRoute } from '@router/index';
+import SkProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+import settings from '@config/index';
 
-const { authentication, loginInterception, progressBar, recordRoute, routesWhiteList } = settings
+const {
+  authentication,
+  loginInterception,
+  progressBar,
+  recordRoute,
+  routesWhiteList
+} = settings;
 
+// 配置进度条
 SkProgress.configure({
   easing: 'ease',
   speed: 500,
   trickleSpeed: 200,
   showSpinner: false,
-})
+});
 
-const RouterGuard = () => {
-  const location = useLocation()
-  const navigator = useNavigate()
-  const elements = useRoutes(constantRoutes.concat(asyncRoutes))
-  const { accessToken, getPermissions, setPermissions, getUserInfo, resetAccessToken } = useUserStore()
-  const { setRoutes, setAllRoutes } = useRoutesStore()
+interface RouteGuardProps {}
 
-  const routeCb = async () => {
-    if (progressBar) SkProgress.start()
-    let hasToken = !!accessToken
-    if (!loginInterception) hasToken = true
-    // hasToken = true
-    if (hasToken) {
-      if (location.pathname === '/login') {
-        navigator('/')
-        if (progressBar) SkProgress.done()
-      } else {
-        const permissions = getPermissions()
-        const hasPermissions = permissions && permissions.length > 0
-        if (hasPermissions) {
-          console.log('有权限')
-          if (progressBar) SkProgress.done()
-        } else {
-          console.log('无权限')
-          try {
-            let permissions: string[] = []
-            if (!loginInterception) {
-              setPermissions(['admin'])
-              permissions = ['admin']
-              // console.log('loginInterception', permissions)
-            } else {
-              const userPermissions = await getUserInfo()
-              // console.log('userPermissions', userPermissions)
-              if (typeof userPermissions !== 'boolean' && userPermissions.length > 0) {
-                permissions = userPermissions
-              } else {
-                permissions = []
-              }
-            }
-            let accessRoutes: CustomRoute[] = []
-            if (authentication === 'intelligence') {
-              accessRoutes = await setRoutes(permissions)
-            } else if (authentication === 'all') {
-              accessRoutes = await setAllRoutes()
-            }
-            if (progressBar) SkProgress.done()
-            console.log('accessRoutes', accessRoutes)
-          } catch (error) {
-            // console.log('catch', error)
-            resetAccessToken()
-            if (progressBar) SkProgress.done()
-          }
-        }
-      }
-    } else {
-      if (routesWhiteList.includes(location.pathname)) {
-        if (progressBar) SkProgress.done()
-        // console.log('跳转', location.pathname)
-      } else {
-        if (recordRoute) {
-          navigator(`/login?redirect=${location.pathname}`)
-        } else {
-          navigator('/login')
-        }
+const RouterGuard: React.FC<RouteGuardProps> = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { accessToken, getPermissions, setPermissions, getUserInfo, resetAccessToken } = useUserStore();
+  const { setRoutes, setAllRoutes } = useRoutesStore();
 
-        if (progressBar) SkProgress.done()
-      }
+  // 直接在组件顶层调用 useRoutes
+  const elements = useRoutes([...constantRoutes, ...asyncRoutes]);
+
+  // 检查是否在白名单路径中
+  const isWhiteListPath = (path: string): boolean => routesWhiteList.includes(path);
+
+  // 处理进度条状态
+  const handleProgressBar = (start: boolean) => {
+    if (progressBar) {
+      start ? SkProgress.start() : SkProgress.done();
     }
-  }
+  };
+
+  // 登录拦截处理
+  const handleLoginInterception = async (hasToken: boolean) => {
+    if (!hasToken) {
+      const redirectPath = recordRoute ? `/login?redirect=${location.pathname}` : '/login';
+      navigate(redirectPath);
+      return;
+    }
+
+    // 登录后逻辑...
+  };
+
+  // 检查权限并设置路由
+  const checkPermissionsAndSetRoutes = async () => {
+    let permissions: string[] = []
+    try {
+      const userPermissions = await getUserInfo();
+      if (typeof userPermissions !== 'boolean' && userPermissions.length > 0) {
+        permissions = userPermissions
+      } else {
+        permissions = []
+      }
+      if (!loginInterception && !permissions.length) {
+        permissions = ['admin'];
+        setPermissions(['admin']);
+      }
+
+      let accessRoutes: CustomRoute[] = [];
+      if (authentication === 'intelligence') {
+        accessRoutes = await setRoutes(permissions);
+      } else if (authentication === 'all') {
+        accessRoutes = await setAllRoutes();
+      }
+
+      console.log('accessRoutes', accessRoutes);
+    } catch (error) {
+      resetAccessToken();
+    } finally {
+      handleProgressBar(false);
+    }
+  };
 
   useEffect(() => {
-    routeCb()
-  }, [location.pathname])
-  // console.log('routerguard', elements, location)
+    handleProgressBar(true);
 
-  return (
-    <>{ elements }</>
-  )
-}
+    const hasToken = !!accessToken || !loginInterception;
 
-export default RouterGuard
+    if (isWhiteListPath(location.pathname)) {
+      handleProgressBar(false);
+      return;
+    }
+
+    if (location.pathname === '/login') {
+      if (hasToken) navigate('/');
+      handleProgressBar(false);
+      return;
+    }
+
+    if (hasToken) {
+      const permissions = getPermissions();
+      if (permissions && permissions.length > 0) {
+        console.log('有权限');
+        handleProgressBar(false);
+      } else {
+        console.log('无权限');
+        void checkPermissionsAndSetRoutes();
+      }
+    } else {
+      void handleLoginInterception(hasToken);
+    }
+
+    // 清除进度条
+    return () => handleProgressBar(false);
+  }, [location.pathname, accessToken]);
+
+  return <>{elements}</>;
+};
+
+export default RouterGuard;
