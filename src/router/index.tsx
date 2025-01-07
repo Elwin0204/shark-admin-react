@@ -1,27 +1,18 @@
-import { lazy, ReactNode } from 'react'
-import { Navigate } from 'react-router-dom'
-import BasicLayout from '@layouts/index'
-import Login from '../pages/Login'
+import { Navigate, useRoutes } from 'react-router-dom'
+import BaseLayout from '@/layouts/BaseLayout'
+import Login from '@/pages/Login'
+import Index from "@/pages/Index"
+import { EagerRouteModules, ExtendedRouteObject } from '@/typings/router'
 
-const Index = lazy(() => import('../pages/Index'))
-const Page401 = lazy(() => import('../pages/401'))
-const Page404 = lazy(() => import('../pages/404'))
+const metaRoutes: EagerRouteModules = import.meta.glob("./modules/*.tsx", { eager: true })
+export const routeArray: ExtendedRouteObject[] = [];
 
-export interface CustomRoute {
-  path: string,
-  name?: string,
-  element?: ReactNode,
-  children?: CustomRoute[],
-  meta?: {
-    title?: string,
-    icon?: string,
-    hidden?: boolean,
-    affix?: boolean,
-    auth?: string[]
-  }
-}
+Object.keys(metaRoutes).forEach((path) => {
+  const module = metaRoutes[path];
+  routeArray.push(...module.default);
+});
 
-export const constantRoutes: CustomRoute[] = [
+export const rootRoutes: ExtendedRouteObject[] = [
   {
     path: '/login',
     element: <Login />,
@@ -31,31 +22,12 @@ export const constantRoutes: CustomRoute[] = [
     }
   },
   {
-    path: '/401',
-    element: <Page401 />,
-    meta: {
-      title: '401',
-      hidden: true
-    }
-  },
-  {
-    path: '/404',
-    element: <Page404 />,
-    meta: {
-      title: '404',
-      hidden: true
-    }
-  }
-]
-
-export const asyncRoutes: CustomRoute[] = [
-  {
     path: '/',
     element: <Navigate to="/index" />,
   },
   {
     path: '/',
-    element: <BasicLayout />,
+    element: <BaseLayout />,
     children: [
       {
         path: 'index',
@@ -67,8 +39,16 @@ export const asyncRoutes: CustomRoute[] = [
       }
     ]
   },
+  ...routeArray,
   {
-    path: "*",
-    element: <Navigate to="/404" replace={true} />,
-  },
+		path: "*",
+		element: <Navigate to="error/404" />
+	}
 ]
+
+const Router = () => {
+	const routes = useRoutes(rootRoutes);
+	return routes;
+};
+
+export default Router;

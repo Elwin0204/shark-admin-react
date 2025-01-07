@@ -1,15 +1,25 @@
 /**
  * @author Elwin
- * @description 全局样式配置
+ * @description 全局主题样式配置
  */
-import { create } from 'zustand' 
+import { create } from 'zustand'
+import defaultSettings from '@/config/index'
+
+const {
+  layout
+} = defaultSettings
 
 export interface ThemeState {
+  layout: string;
   primaryColor: string;
   //框架默认主题色
   baseColorDefault: string;
   //默认层级
   baseZindex: 999;
+  baseHeaderZindex: number;
+  baseTabsBarZindex: number;
+  baseSideBarZindex: number;
+  baseFooterZindex: number;
   //横向布局纵向布局时菜单背景色
   baseMenuBackground: string;
   //菜单文字颜色
@@ -55,19 +65,23 @@ export interface ThemeState {
   //纵向布局时logo的高度
   baseLogoHeight: number;
   //顶部nav-bar的高度
-  baseNavBarHeight: number;
+  baseHeaderHeight: number;
+  baseFooterHeight: number;
   //顶部多标签页tabs-bar的高度
   baseTabsBarHeight: number;
   //顶部多标签页tabs-bar中每一个item的高度
   baseTagItemHeight: number;
   //菜单li标签的高度
   baseMenuItemHeight: number;
+  setLayout: (layout: string) => void;
   //app-main的高度
   baseAppMainHeight: () => string;
   // app-main-container高度
   baseAppMainContainerHeight: () => string;
-  //纵向布局时左侧导航未折叠时的宽度
-  baseLeftMenuWidth: number;
+  // 左侧菜单未折叠时的宽度
+  baseSidebarWidth: number;
+  // 左侧菜单折叠时的宽度
+  baseSidebarCollapseWidth: number;
   //纵向布局时左侧导航未折叠时右侧内容的宽度
   baseRightContentWidth: () => string;
   //纵向布局时左侧导航已折叠时的宽度
@@ -83,9 +97,14 @@ export interface ThemeState {
 
 const useThemeStore = create<ThemeState>()(
   (set, get) => ({
+    layout: layout,
     primaryColor: '#247fff',
     baseColorDefault: '#5E7CE0',
     baseZindex: 999,
+    baseHeaderZindex: 17,
+    baseTabsBarZindex: 15,
+    baseSideBarZindex: 19,
+    baseFooterZindex: 15,
     baseMenuBackground: '#fff',
     baseMenuColor: '#575d6c',
     baseMenuColorHover: '#96ADFA',
@@ -116,19 +135,22 @@ const useThemeStore = create<ThemeState>()(
     baseBoxShadow: '0 1px 4px rgba(0, 21, 41, 0.08)',
     baseTopBarHeight: 65,
     baseLogoHeight: 75,
-    baseNavBarHeight: 60,
-    baseTabsBarHeight: 55,
+    baseHeaderHeight: 56,
+    baseFooterHeight: 48,
+    baseTabsBarHeight: 44,
     baseTagItemHeight: 34,
     baseMenuItemHeight: 50,
+    setLayout: (layout) => set(() => ({ layout: layout })),
     baseAppMainHeight: () => {
-      return `calc(100vh - ${get().baseNavBarHeight}px - ${get().baseTabsBarHeight}px - ${get().basePadding}px - ${get().basePadding}px - 55px - 55px)`
+      return `calc(100vh - ${get().baseHeaderHeight}px - ${get().baseTabsBarHeight}px - ${get().basePadding}px - ${get().basePadding}px - 55px - 55px)`
     },
     baseAppMainContainerHeight: () => {
-      return `calc(100vh - ${get().baseNavBarHeight}px - ${get().baseTabsBarHeight}px)`
+      return `calc(100vh - ${get().baseHeaderHeight}px - ${get().baseTabsBarHeight}px)`
     },
-    baseLeftMenuWidth: 256,
+    baseSidebarWidth: 220,
+    baseSidebarCollapseWidth: 64,
     baseRightContentWidth: () => {
-      return `calc(100% - ${get().baseLeftMenuWidth}px)`
+      return `calc(100% - ${get().baseSidebarWidth}px)`
     },
     baseLeftMenuWidthMin: 65,
     baseRightContentWidthMin: () => {

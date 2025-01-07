@@ -1,145 +1,55 @@
 import { createStyles } from 'antd-style'
 
 export default createStyles(({ token, css }) => {
-  const { baseTopBarHeight, baseTabsBarHeight, baseZindex, baseNavBarHeight, baseColorWhite, baseBoxShadow, basePadding, baseLeftMenuWidth, baseTransition, baseRightContentWidth, baseLeftMenuWidthMin } = token
+  const { baseSidebarWidth, baseSidebarCollapseWidth, baseHeaderZindex, baseHeaderHeight, baseTabsBarHeight, baseTabsBarZindex, baseSideBarZindex, baseFooterZindex, baseFooterHeight } = token;
   return {
-    sharkAdminWrapper: css`
-      position: relative;
-      width: 100%;
-      height: 100%;
-      & .layout-container-horizontal {
-        position: relative;
-        &.fixed {
-          padding-top: calc(${baseTopBarHeight}px + ${baseTabsBarHeight}px);
-        }
-
-        &.fixed.no-tabs-bar {
-          padding-top: ${baseTopBarHeight}px;
-        }
-
-        .sk-main {
-          width: 88%;
-          margin: auto;
-        }
-
-        .fixed-header {
-          position: fixed;
-          top: 0;
-          right: 0;
-          left: 0;
-          z-index: ${baseZindex} - 2;
-          width: 100%;
-          overflow: hidden;
-        }
-
-        .tag-view-show {
-          background: ${baseColorWhite};
-          box-shadow: ${baseBoxShadow};
-        }
-
-        .nav-bar-container {
-          .fold-unfold {
-            display: none;
-          }
-        }
-
-        .main-padding {
-          .app-main-container {
-            margin-top: ${basePadding}px;
-            margin-bottom: ${basePadding}px;
-            background: ${baseColorWhite};
-          }
-        }
-      }
-
-      & .layout-container-vertical {
-        position: relative;
-        .mask {
-          position: fixed;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          z-index: ${baseZindex} - 1;
-          width: 100%;
-          height: 100vh;
-          overflow: hidden;
-          background: #000;
-          opacity: 0.5;
-        }
-        &.fixed {
-          padding-top: calc(${baseNavBarHeight}px + ${baseTabsBarHeight}px);
-        }
-
-        &.fixed.no-tabs-bar {
-          padding-top: ${baseNavBarHeight}px;
-        }
-
-        .sk-main {
-          position: relative;
-          min-height: 100%;
-          margin-left: ${baseLeftMenuWidth}px;
-          background: #f6f8f9;
-          transition: ${baseTransition};
-
-          .fixed-header {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: ${baseLeftMenuWidth}px;
-            z-index: ${baseZindex} - 2;
-            width: ${baseRightContentWidth()};
-            box-shadow: ${baseBoxShadow};
-            transition: ${baseTransition};
-            overflow: hidden;
-          }
-
-          .nav-bar-container {
-            position: relative;
-            box-sizing: border-box;
-          }
-
-          .tabs-bar-container {
-            box-sizing: border-box;
-          }
-
-          .app-main-container {
-            background: ${baseColorWhite};
-          }
-
-          &.is-collapse-main {
-            margin-left: ${baseLeftMenuWidthMin}px;
-
-            .fixed-header {
-              left: ${baseLeftMenuWidthMin}px;
-              width: calc(100% - 65px);
-            }
-          }
-        }
-      }
-
-      &.mobile {
-        .layout-container-vertical {
-          .el-scrollbar.side-bar-container.is-collapse {
-            width: 0;
-            .sk-collapse.is-collapse {
-              width: 20px;
-            }
-          }
-
-          .sk-main {
-            width: 100%;
-            margin-left: 0;
-          }
-        }
-
-        .sk-main {
-          .fixed-header {
-            left: 0 !important;
-            width: 100% !important;
-          }
-        }
-      }
+    appHeader: css`
+      z-index: ${baseHeaderZindex};
+      height: ${baseHeaderHeight}px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    `,
+    appHeaderPlacement: css`
+      height: ${baseHeaderHeight}px;
+    `,
+    appTabsBar: css`
+      z-index: ${baseTabsBarZindex};
+      height: ${baseTabsBarHeight}px;
+      position: absolute;
+      left: 0;
+      top: ${baseHeaderHeight}px;
+    `,
+    appTabsBarPlacement: css`
+      height: ${baseTabsBarHeight}px;
+    `,
+    appSideBar: css`
+      z-index: ${baseSideBarZindex};
+      position: absolute;
+      left: 0;
+      top: 0;
+    `,
+    appMain: css`
+      
+    `,
+    sidebarWidth: css`
+      width: ${baseSidebarWidth}px;
+    `,
+    sidebarCollapseWidth: css`
+      width: ${baseSidebarCollapseWidth}px;
+    `,
+    leftGap: css`
+      padding-left: ${baseSidebarWidth}px;
+    `,
+    leftGapCollapse: css`
+      padding-left: ${baseSidebarCollapseWidth}px;
+    `,
+    appFooter: css`
+      z-index: ${baseFooterZindex};
+      height: ${baseFooterHeight}px;
+    `,
+    appFooterPlacement: css`
+      height: ${baseFooterHeight}px;
     `,
   }
 })

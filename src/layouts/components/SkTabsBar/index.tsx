@@ -1,6 +1,12 @@
+import classnames from 'classnames'
+import useBaseStyles from '@/assets/styles/base'
+import useStyles from "./style"
+
 const SkTabsBar: React.FC = () => {
+  const { styles: baseStyles } = useBaseStyles()
+  const { styles } = useStyles()
   return (
-    <div>tabs bar</div>
+    <div>tabs</div>
   )
 }
 

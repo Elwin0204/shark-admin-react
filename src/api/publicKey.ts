@@ -1,7 +1,7 @@
-import request from '@utils/request'
+import http from "@/utils/http";
 
 export function getPublicKey() {
-  return request({
+  return http.request({
     url: '/publicKey',
     method: 'post',
   })

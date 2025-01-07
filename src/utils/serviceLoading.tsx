@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import SkLoading from '@components/SkLoading/index'
+import SkLoading from '@/components/SkLoading/index'
 
 let requestCount = 0
 

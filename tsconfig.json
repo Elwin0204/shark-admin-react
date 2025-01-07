@@ -13,30 +13,16 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "@api/*": ["api/*"],
-      "@assets/*": ["assets/*"],
-      "@components/*": ["components/*"],
-      "@config/*": ["config/*"],
-      "@hooks/*": ["hooks/*"],
-      "@i18n/*": ["i18n/*"],
-      "@layouts/*": ["layouts/*"],
-      "@pages/*": ["pages/*"],
-      "@router/*": ["router/*"],
-      "@stores/*": ["stores/*"],
-      "@utils/*": ["utils/*"],
-      "@services/*": ["services/*"],
-      "@styles/*": ["styles/*"],
+      "@/*": ["src/*"],
     },
-
+    "types": ["vite/client"],
     /* Linting */
     "strict": true,
-    // "noUnusedLocals": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/typings/*.d.ts", "vite.config.ts"]
 }

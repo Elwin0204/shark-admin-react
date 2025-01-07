@@ -3,7 +3,7 @@
  * @description 导入所有 controller 模块，浏览器环境中自动输出controller文件夹下Mock接口。
  */
 import Mock from 'mockjs'
-import { paramObj } from '@utils/index'
+import { paramObj } from '@/utils/index'
 
 interface MockjsRequestOptions {
   url: string;
@@ -33,8 +33,9 @@ export function mockXHR() {
         this.custom.xhr.responseType = this.responseType
       }
     }
-    // eslint-disable-next-line prefer-rest-params
-    this.proxy_send(...arguments)
+    // 将 arguments 转换为数组并传递给 proxy_send
+    const args = Array.prototype.slice.call(arguments);
+    this.proxy_send.apply(this, args);
   }
 
   function XHRHttpRequst(respond: MockItem["response"]) {

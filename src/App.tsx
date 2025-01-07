@@ -3,12 +3,13 @@ import { ConfigProvider } from 'antd'
 import zhCN from 'antd/es/locale/zh_CN'
 import 'antd/dist/reset.css'
 import './App.css'
-import { useSettingStore } from '@stores/index'
-import RouterGuard from '@components/RouterGuard'
-import SkLoading from '@components/SkLoading'
-import useThemeStore from '@stores/modules/theme'
+import { useAppStore } from '@/stores/index'
+import RouterGuard from './router/shared/routerGuard'
+import Router from "@/router/index"
+import SkLoading from '@/components/SkLoading'
+import useThemeStore from '@/stores/modules/theme'
 import { ThemeProvider } from 'antd-style'
-import type { ThemeState } from '@stores/modules/theme'
+import type { ThemeState } from '@/stores/modules/theme'
 
 // 通过给 antd-style 扩展 CustomToken 对象类型定义，可以为 useTheme 中增加相应的 token 对象
 declare module 'antd-style' {
@@ -17,7 +18,7 @@ declare module 'antd-style' {
 }
 
 const App: React.FC = () => {
-  const { primaryColor } = useSettingStore()
+  const { primaryColor } = useAppStore()
   const customToken = useThemeStore()
   return (
     <ThemeProvider<ThemeState> customToken={{ ...customToken }}>
@@ -28,7 +29,9 @@ const App: React.FC = () => {
         }}
       >
         <Suspense fallback={<SkLoading />}>
-          <RouterGuard />
+          <RouterGuard>
+            <Router />
+          </RouterGuard>
         </Suspense>
       </ConfigProvider>
     </ThemeProvider>

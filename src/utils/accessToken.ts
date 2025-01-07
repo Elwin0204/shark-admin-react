@@ -3,7 +3,7 @@
  * @description token相关
  */
 
-import settings from '@config/index'
+import settings from '@/config/index'
 
 const { storage, tokenTableName } = settings
 

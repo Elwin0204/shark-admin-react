@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Form, Input, Button, Alert } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import { useUserStore } from '@stores/index'
+import { useUserStore } from '@/stores/index'
 import useStyles from './style'
 import { useNavigate } from 'react-router-dom'
 
