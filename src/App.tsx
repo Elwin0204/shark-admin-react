@@ -6,7 +6,7 @@ import './App.css'
 import { useAppStore } from '@/stores/index'
 import RouterGuard from './router/shared/routerGuard'
 import Router from "@/router/index"
-import SkLoading from '@/components/SkLoading'
+import SkLoading from '@/components/ui/SkLoading'
 import useThemeStore from '@/stores/modules/theme'
 import { ThemeProvider } from 'antd-style'
 import type { ThemeState } from '@/stores/modules/theme'

@@ -4,13 +4,16 @@
  */
 import { create } from 'zustand'
 import defaultSettings from '@/config/index'
+import { getNextThemeMode } from '../shared/theme.util';
 
 const {
-  layout
+  layout,
+  themeMode
 } = defaultSettings
 
 export interface ThemeState {
-  layout: string;
+  layout: UnionKey.LayoutMode;
+  themeMode: UnionKey.ThemeMode;
   primaryColor: string;
   //框架默认主题色
   baseColorDefault: string;
@@ -73,7 +76,8 @@ export interface ThemeState {
   baseTagItemHeight: number;
   //菜单li标签的高度
   baseMenuItemHeight: number;
-  setLayout: (layout: string) => void;
+  setLayout: (layout: UnionKey.LayoutMode) => void;
+  toggleThemeMode: (themeMode?: UnionKey.ThemeMode) => void;
   //app-main的高度
   baseAppMainHeight: () => string;
   // app-main-container高度
@@ -97,7 +101,8 @@ export interface ThemeState {
 
 const useThemeStore = create<ThemeState>()(
   (set, get) => ({
-    layout: layout,
+    layout: layout as UnionKey.LayoutMode,
+    themeMode: themeMode as UnionKey.ThemeMode,
     primaryColor: '#247fff',
     baseColorDefault: '#5E7CE0',
     baseZindex: 999,
@@ -140,24 +145,28 @@ const useThemeStore = create<ThemeState>()(
     baseTabsBarHeight: 44,
     baseTagItemHeight: 34,
     baseMenuItemHeight: 50,
-    setLayout: (layout) => set(() => ({ layout: layout })),
+    baseSidebarWidth: 220,
+    baseSidebarCollapseWidth: 64,
+    baseLeftMenuWidthMin: 65,
+    baseTransition: 'all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border 0s background 0s, color 0s, font-size 0s',
+    baseTransitionTime: '0.3s',
+    setLayout: (layout: UnionKey.LayoutMode) => set(() => ({ layout: layout })),
+    toggleThemeMode: (themeMode?: UnionKey.ThemeMode)=> {
+      const newThemeMode = getNextThemeMode(get().themeMode);
+      set(() => ({ themeMode: newThemeMode }))
+    },
     baseAppMainHeight: () => {
       return `calc(100vh - ${get().baseHeaderHeight}px - ${get().baseTabsBarHeight}px - ${get().basePadding}px - ${get().basePadding}px - 55px - 55px)`
     },
     baseAppMainContainerHeight: () => {
       return `calc(100vh - ${get().baseHeaderHeight}px - ${get().baseTabsBarHeight}px)`
     },
-    baseSidebarWidth: 220,
-    baseSidebarCollapseWidth: 64,
     baseRightContentWidth: () => {
       return `calc(100% - ${get().baseSidebarWidth}px)`
     },
-    baseLeftMenuWidthMin: 65,
     baseRightContentWidthMin: () => {
       return `calc(100% - ${get().baseLeftMenuWidthMin}px)`
     },
-    baseTransition: 'all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border 0s background 0s, color 0s, font-size 0s',
-    baseTransitionTime: '0.3s',
     setColor: (color) => set(() => ({ primaryColor: color })),
   }),
 )

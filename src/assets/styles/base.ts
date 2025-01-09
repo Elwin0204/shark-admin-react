@@ -39,6 +39,13 @@ export default createStyles(({ token, css }) => {
     flexGrow: css`
       flex-grow: 1;
     `,
+    flex1Hidden: css`
+      flex: 1;
+      overflow: hidden;
+    `,
+    justifyEnd: css`
+      justify-content: flex-end;
+    `,
     textCenter: css`
       text-align: center;
     `,
@@ -51,6 +58,10 @@ export default createStyles(({ token, css }) => {
     `,
     overflowYAuto: css`
       overflow-y: auto;
+    `,
+    nowrapHidden: css`
+      overflow: hidden;
+      white-space: nowrap;
     `,
     transitionAll300: css`
       transition-property: all;

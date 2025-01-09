@@ -12,7 +12,7 @@ const theme = {
   //是否显示多标签页
   showTabsBar: true,
   // 主题名称
-  themeName: 'default',
+  themeMode: 'light',
 }
 
 export default theme

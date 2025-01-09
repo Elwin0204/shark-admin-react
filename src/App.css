@@ -4,10 +4,6 @@ html, body, #shark-admin {
   overflow: hidden;
 }
 
-.layout-container-vertical.fixed {
-  height: 100%;
-}
-
 body {
   position: relative;
   height: 100vh;
@@ -43,4 +39,8 @@ body {
   justify-content: center;
   align-items: center;
 	/* background: rgba(0, 0, 0, 0.45); */
+}
+
+:not(:root):fullscreen::backdrop {
+  display: none;
 }
