@@ -11,6 +11,8 @@ import { convertToRoutesAndBtns } from '@/router/shared/routerUtils';
 interface AuthState {
   authRoutes: ExtendedRouteObject[];
   authBtns: string[];
+  currentRoute: ExtendedRouteObject | null; // 添加 currentRoute 状态
+  setCurrentRoute: (route: ExtendedRouteObject | null) => void; // 添加设置 currentRoute 的方法
   fetchPermissions: () => Promise<void>;
 }
 
@@ -18,6 +20,8 @@ const useAuthStore = create<AuthState>()(
   (set) => ({
     authRoutes: [],
     authBtns: [],
+    currentRoute: null,
+    setCurrentRoute: (route) => set(() => ({ currentRoute: route })),
     fetchPermissions: async () => {
       console.log("执行了");
       try {

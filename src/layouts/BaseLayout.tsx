@@ -10,6 +10,8 @@ import {
 import { useAppStore, useThemeStore } from '@/stores';
 import { Suspense } from 'react';
 import SkThemeDrawer from '@/components/layouts/SkThemeDrawer';
+import SkMenu from '@/components/layouts/SkMenu';
+import MenuProvider from './MenuProvider';
 
 const BaseLayout: React.FC = () => {
   const { styles: baseStyles } = useBaseStyles();
@@ -39,6 +41,7 @@ const BaseLayout: React.FC = () => {
       <footer className={ cx(baseStyles.flexShrink0, baseStyles.transitionAll300, styles.appFooter, leftGap) }>
         <SkAppFooter />
       </footer>
+      <SkMenu layout={layout} />
       <Suspense fallback={null}>
         <SkThemeDrawer />
       </Suspense>
@@ -47,4 +50,12 @@ const BaseLayout: React.FC = () => {
   )
 }
 
-export default BaseLayout
+const BaseLayoutProvider = () => {
+  return (
+    <MenuProvider>
+      <BaseLayout />
+    </MenuProvider>
+  );
+}
+
+export default BaseLayoutProvider

@@ -12,3 +12,5 @@ const SkDarkWrapper: React.FC<Props> = ({ children, inverted, ...rest }) => {
     </div>
   );
 }
+
+export default SkDarkWrapper;

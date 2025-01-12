@@ -19,13 +19,13 @@ const SkLayoutModeCards: React.FC = () => {
         </div>
       </Tooltip>
       <Tooltip title="顶部模式" placement='bottom'>
-        <div className={cx(styles.layoutCard, styles.layoutCardMb, styles.layoutTop, layout === "horizontal-mix" ? "is-active" : "")} onClick={() => setLayout("horizontal-mix")}>
+        <div className={cx(styles.layoutCard, styles.layoutCardMb, styles.layoutTop, layout === "horizontal" ? "is-active" : "")} onClick={() => setLayout("horizontal")}>
           <div className={cx("card-dark", styles.layoutDarkInTop)}></div>
           <div className={cx("card-content", styles.layoutContent)}></div>
         </div>
       </Tooltip>
       <Tooltip title="混合模式" placement='bottom'>
-        <div className={cx(styles.layoutCard, styles.layoutCardMb, styles.layoutMix, layout === "horizontal" ? "is-active" : "")} onClick={() => setLayout("horizontal")}>
+        <div className={cx(styles.layoutCard, styles.layoutCardMb, styles.layoutMix, layout === "horizontal-mix" ? "is-active" : "")} onClick={() => setLayout("horizontal-mix")}>
           <div className={cx("card-dark", styles.layoutDarkInMix)}></div>
           <div className={cx(styles.layoutContainerInMix)}>
             <div className={cx("card-light", styles.layoutLightInMix)}></div>

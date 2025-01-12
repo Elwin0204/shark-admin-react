@@ -1,3 +1,4 @@
+import { MixMenuContext } from "@/layouts/context";
 import { useAppStore } from "@/stores";
 
 export function useGetElementById(id: string) {
@@ -10,4 +11,8 @@ export function useGetElementById(id: string) {
   }, [isMobile]);
 
   return container;
+}
+
+export function useMixMenuContext() {
+  return useContext(MixMenuContext);
 }

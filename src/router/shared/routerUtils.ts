@@ -32,7 +32,7 @@ function matchPath(fullPath: string, currentPath: string): boolean {
 }
 
 // 递归查找匹配路由的函数
-function findMatchingRoute(routes: ExtendedRouteObject[], basePath: string, currentPath: string): ExtendedRouteObject | undefined {
+function findMatchingRoute(routes: ExtendedRouteObject[], basePath: string, currentPath: string): ExtendedRouteObject | null {
   for (const route of routes) {
     const fullPath = buildFullPath(basePath, route);
 
@@ -47,11 +47,11 @@ function findMatchingRoute(routes: ExtendedRouteObject[], basePath: string, curr
       }
     }
   }
-  return undefined;
+  return null;
 }
 
 // 主函数：匹配当前路径到路由配置
-export function matchRoute(pathname: string, routes: ExtendedRouteObject[]): ExtendedRouteObject | undefined {
+export function matchRoute(pathname: string, routes: ExtendedRouteObject[]): ExtendedRouteObject | null {
   return findMatchingRoute(routes, '', pathname);
 }
 

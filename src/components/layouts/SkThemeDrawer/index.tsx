@@ -14,7 +14,7 @@ const SkThemeDrawer: React.FC = () => {
   }
 
   return (
-    <Drawer title="主题配置" open={themeDrawerVisible} onClose={close} width="290">
+    <Drawer title="主题配置" open={themeDrawerVisible} onClose={close} width={290}>
       <Divider style={{ borderColor: '#bfbfbf' }}>
         <span className={cx(baseStyles.flexCenter)}>
           <SvgIcon icon="tabler:layout" className={cx(styles.dividerIcon)} />
