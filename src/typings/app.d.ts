@@ -13,5 +13,6 @@ declare namespace App {
     icon?: React.FunctionComponentElement<IconProps>;
     title?: string;
     children?: Menu[];
+    _children?: Menu[];
   }
 }

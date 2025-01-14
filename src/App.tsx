@@ -3,6 +3,7 @@ import { ConfigProvider } from 'antd'
 import zhCN from 'antd/es/locale/zh_CN'
 import 'antd/dist/reset.css'
 import './App.css'
+import "@/assets/styles/reset.css"
 import { useAppStore } from '@/stores/index'
 import RouterGuard from './router/shared/routerGuard'
 import Router from "@/router/index"

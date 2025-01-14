@@ -11,7 +11,7 @@ const RouterGuard = (props: { children: JSX.Element }) => {
   const { authRoutes, fetchPermissions } = useAuthStore();
   const navigator = useNavigate();
   const route = matchRoute(pathname, rootRoutes);
-  console.log("route", route);
+  console.log("RouterGuard", route, accessToken);
   // 跳转之前, 清除所有pending状态的请求
   pendingRequestManager.removeAllPending();
 

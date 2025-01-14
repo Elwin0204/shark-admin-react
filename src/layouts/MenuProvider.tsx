@@ -1,5 +1,5 @@
-import { useAuthStore, useTabStore } from "@/stores";
-import { getMenusByAuthRoutes } from "./MenuUtils";
+import { useAppStore, useAuthStore, useTabStore } from "@/stores";
+import { getMenusByAuthRoutes, getOpenKeys } from "./MenuUtils";
 import { MixMenuContext } from "./context";
 
 interface Props {
@@ -8,15 +8,19 @@ interface Props {
 
 const MenuProvider: React.FC<Props> = ({ children }) => {
   const { pathname } = useLocation();
+  const { collapse } = useAppStore();
   const { authRoutes, currentRoute } = useAuthStore();
   const menus = getMenusByAuthRoutes(authRoutes);
 
   const { activeFirstLevelMenuKey, setActiveFirstLevelMenuKey } = useTabStore();
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
+  const [openKeys, setOpenKeys] = useState(collapse ? [] : getOpenKeys(pathname));
 
   useEffect(() => {
 		setSelectedKeys([pathname]);
-		// isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
+    if(!collapse) {
+      setOpenKeys(getOpenKeys(pathname));
+    }
 	}, [pathname]);
 
   const firstLevelMenu = useMemo(
@@ -35,6 +39,8 @@ const MenuProvider: React.FC<Props> = ({ children }) => {
     setActiveFirstLevelMenuKey: setActiveFirstLevelMenuKey,
     firstLevelMenu,
     selectedKeys,
+    openKeys,
+    setOpenKeys,
     isActiveFirstLevelMenuHasChildren: activeFirstLevelMenuKey ? Boolean(childLevelMenus) : false,
     childLevelMenus: childLevelMenus || [],
     route: currentRoute

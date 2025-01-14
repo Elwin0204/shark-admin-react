@@ -10,15 +10,15 @@ interface Props {
 
 const SKSideBar: React.FC<Props> = ({ showLogo, collapse }) => {
   const { styles: baseStyles } = useBaseStyles();
-  const { styles } = useStyles();
+  const { styles, cx } = useStyles();
 
   return (
-    <div>
+    <SkDarkWrapper className={cx(baseStyles.sizeFull, baseStyles.flexColStretch, styles.sideBarContainer)}>
       {showLogo && (
         <SkLogo showTitle={!collapse} />
       )}
       <div id={APP_SIDER_MENU_ID} className={showLogo ? baseStyles.flex1Hidden : baseStyles.hFull } />
-    </div>
+    </SkDarkWrapper>
   )
 }
 

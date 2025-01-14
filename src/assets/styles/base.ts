@@ -33,6 +33,11 @@ export default createStyles(({ token, css }) => {
       justify-content: space-between;
       align-items: center;
     `,
+    flexColStretch: css`
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    `,
     flexShrink0: css`
       flex-shrink: 0;
     `,
@@ -45,6 +50,10 @@ export default createStyles(({ token, css }) => {
     `,
     justifyEnd: css`
       justify-content: flex-end;
+    `,
+    iFlexYCenter: css`
+      display: inline-flex;
+      align-items: center;
     `,
     textCenter: css`
       text-align: center;
@@ -62,6 +71,12 @@ export default createStyles(({ token, css }) => {
     nowrapHidden: css`
       overflow: hidden;
       white-space: nowrap;
+    `,
+    alignMiddle: css`
+      vertical-align: middle;
+    `,
+    cursorPointer: css`
+      cursor: pointer;
     `,
     transitionAll300: css`
       transition-property: all;

@@ -18,7 +18,7 @@ interface AppState {
   primaryColor: string;
   changeNetwork: (hasNetwork: boolean) => void;
   setColor: (color: string) => void;
-  foldSidebar: (collapse: boolean) => void;
+  toggleSidebar: (collapse: boolean) => void;
   setThemeDrawerVisible: (visible: boolean) => void;
 }
 
@@ -32,7 +32,7 @@ const useAppStore = create<AppState>()(
     primaryColor: '#247fff',
     changeNetwork: (hasNetwork) => set(() => ({ hasNetwork: hasNetwork })),
     setColor: (color) => set(() => ({ primaryColor: color })),
-    foldSidebar: (collapse) => set(() => ({ collapse: collapse })),
+    toggleSidebar: (collapse) => set(() => ({ collapse: collapse })),
     setThemeDrawerVisible: (visible) => set(() => ({ themeDrawerVisible: visible })),
   }),
 )

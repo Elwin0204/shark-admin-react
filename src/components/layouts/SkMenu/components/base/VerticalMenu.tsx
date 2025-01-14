@@ -8,13 +8,19 @@ const VerticalMenu = () => {
   const { styles: baseStyles, cx } = useBaseStyle();
   const { layout } = useThemeStore();
   const { collapse } = useAppStore();
+  const navigator = useNavigate();
   const isMix = layout.includes("mix");
   const isVerticalMix = layout === "vertical-mix";
-  const { allMenus, childLevelMenus, selectedKeys, route } = useMixMenuContext();
-  console.log("allMenus", allMenus, selectedKeys, route);
+  const { allMenus, childLevelMenus, selectedKeys, openKeys, setOpenKeys } = useMixMenuContext();
+  console.log("allMenus", allMenus, selectedKeys);
 
   const handleMenuSelect: MenuProps["onSelect"] = ({ item, key }) => {
     console.log("click", item, key);
+    navigator(key);
+  }
+
+  const onOpenChange: MenuProps["onOpenChange"] = (openKeys) => {
+    setOpenKeys(openKeys);
   }
 
   return (
@@ -24,9 +30,11 @@ const VerticalMenu = () => {
         items={isMix ? childLevelMenus : allMenus}
         inlineCollapsed={isVerticalMix ? false : collapse}
         selectedKeys={selectedKeys}
+        openKeys={openKeys}
         inlineIndent={18}
         className={cx(baseStyles.sizeFull, baseStyles.transitionAll300)}
         onSelect={handleMenuSelect}
+        onOpenChange={onOpenChange}
       />
     </SkScrollbar>
   );

@@ -9,6 +9,8 @@ export interface MixMenuContextProps {
   childLevelMenus: App.Menu[];
   isActiveFirstLevelMenuHasChildren: boolean;
   selectedKeys: string[];
+  openKeys: string[];
+  setOpenKeys: (openKeys: string[]) => void;
   route: ExtendedRouteObject | null;
 }
 
@@ -22,5 +24,7 @@ export const MixMenuContext = createContext<MixMenuContextProps>({
   childLevelMenus: [],
   isActiveFirstLevelMenuHasChildren: false,
   selectedKeys: [],
+  openKeys: [],
+  setOpenKeys: voidFunc,
   route: {}
 });

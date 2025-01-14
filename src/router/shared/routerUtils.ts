@@ -1,7 +1,7 @@
 import { ExtendedRouteObject } from "@/typings/router";
 
 // 构建完整路径的函数
-function buildFullPath(basePath: string, route: ExtendedRouteObject): string {
+export function buildFullPath(basePath: string, route: ExtendedRouteObject): string {
   // 确保 route.path 存在并且是一个字符串
   const path = route.path || '';
   if (path === '/' || path === '*') {
