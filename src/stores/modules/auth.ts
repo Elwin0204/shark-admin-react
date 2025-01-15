@@ -14,6 +14,7 @@ interface AuthState {
   currentRoute: ExtendedRouteObject | null; // 添加 currentRoute 状态
   setCurrentRoute: (route: ExtendedRouteObject | null) => void; // 添加设置 currentRoute 的方法
   fetchPermissions: () => Promise<void>;
+  resetAuth: () => void;
 }
 
 const useAuthStore = create<AuthState>()(
@@ -39,6 +40,9 @@ const useAuthStore = create<AuthState>()(
         console.log("兜底操作");
       }
     },
+    resetAuth: () => {
+      set(() => ({ authRoutes: [], authBtns: [] }));
+    }
   })
 )
 

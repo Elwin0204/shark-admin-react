@@ -1,4 +1,4 @@
-import { pendingRequestManager } from "@/utils/pendingRequestManager";
+// import { pendingRequestManager } from "@/utils/pendingRequestManager";
 import { useLocation, useNavigate } from "react-router-dom";
 import { rootRoutes } from "..";
 import { matchRoute } from "./routerUtils";
@@ -11,9 +11,9 @@ const RouterGuard = (props: { children: JSX.Element }) => {
   const { authRoutes, fetchPermissions } = useAuthStore();
   const navigator = useNavigate();
   const route = matchRoute(pathname, rootRoutes);
-  console.log("RouterGuard", route, accessToken);
+  console.log("RouterGuard", route);
   // 跳转之前, 清除所有pending状态的请求
-  pendingRequestManager.removeAllPending();
+  // pendingRequestManager.removeAllPending();
 
   // 状态变量用于跟踪是否已经尝试过获取权限
   const [hasFetchedPermissions, setHasFetchedPermissions] = useState(false);
@@ -31,13 +31,14 @@ const RouterGuard = (props: { children: JSX.Element }) => {
     }
   }, [accessToken, hasFetchedPermissions]);
 
+  useEffect(() => {
+    if (!accessToken) {
+      navigator('/login', { replace: true });
+    }
+  }, []);
+
   // 不需要权限, 直接放行
   if(!route?.meta?.auth) return props.children;
-
-  if (!accessToken) {
-    navigator('/login', { replace: true });
-    return null;
-  };
 
   return props.children;
 };

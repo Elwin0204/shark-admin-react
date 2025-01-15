@@ -35,6 +35,7 @@ export const rootRoutes: ExtendedRouteObject[] = [
         meta: {
           title: '首页',
           icon: 'home',
+          auth: true,
         }
       }
     ]

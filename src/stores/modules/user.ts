@@ -25,6 +25,7 @@ interface UserState {
   getRoles: () => string[];
   fetchUserInfo: () => Promise<string[] | boolean>;
   login: (params: { username: string, password: string }) => Promise<string>;
+  resetUser: () => void;
 }
 
 const useUserStore = create<UserState>()(
@@ -97,6 +98,9 @@ const useUserStore = create<UserState>()(
           baseMessage('error', `登录接口异常，未正确返回${tokenName}...`)
         }
         return accessToken
+      },
+      resetUser: () => {
+        set(() => ({ accessToken: null, userInfo: null }));
       }
     }),
     {
