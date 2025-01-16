@@ -20,7 +20,7 @@ const RouterGuard = (props: { children: JSX.Element }) => {
 
   // 确保首次加载时获取权限
   useEffect(() => {
-    if (accessToken && !hasFetchedPermissions && authRoutes.length === 0) {
+    if (accessToken && authRoutes.length === 0) {
       console.log('Fetching permissions on initial load...');
       fetchPermissions().then(() => {
         console.log('Permissions fetched successfully');

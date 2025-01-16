@@ -12,10 +12,8 @@ const VerticalMenu = () => {
   const isMix = layout.includes("mix");
   const isVerticalMix = layout === "vertical-mix";
   const { allMenus, childLevelMenus, selectedKeys, openKeys, setOpenKeys } = useMixMenuContext();
-  console.log("allMenus", allMenus, selectedKeys);
 
-  const handleMenuSelect: MenuProps["onSelect"] = ({ item, key }) => {
-    console.log("click", item, key);
+  const handleMenuSelect: MenuProps["onSelect"] = ({ key }) => {
     navigator(key);
   }
 

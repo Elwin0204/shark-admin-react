@@ -7,14 +7,55 @@ import SkThemeModeToggle from '@/components/layouts/SkThemeModeToggle';
 import { APP_HEADER_MENU_ID } from '@/const/app';
 import SkBreadcrumb from '@/components/layouts/SkBreadcrumb';
 
-const SkAppHeader: React.FC = () => {
-  const { styles: baseStyles } = useBaseStyles()
-  const { styles, cx } = useStyles()
+const HeaderPropsMap = new Map<UnionKey.LayoutMode, App.HeaderProps>([
+  [
+    "vertical",
+    {
+      logoVisible: false,
+      collapseVisible: true,
+      breadcrumbVisible: true,
+    }
+  ],
+  [
+    "horizontal",
+    {
+      logoVisible: true,
+      collapseVisible: false,
+      breadcrumbVisible: false,
+    }
+  ],
+  [
+    "vertical-mix",
+    {
+      logoVisible: true,
+      collapseVisible: true,
+      breadcrumbVisible: true,
+    }
+  ],
+  [
+    "horizontal-mix",
+    {
+      logoVisible: true,
+      collapseVisible: false,
+      breadcrumbVisible: true,
+    }
+  ],
+]);
+
+interface Props {
+  layout: UnionKey.LayoutMode;
+}
+
+const SkAppHeader: React.FC<Props> = ({ layout }) => {
+  const { styles: baseStyles } = useBaseStyles();
+  const { styles, cx } = useStyles();
+  const { logoVisible, collapseVisible, breadcrumbVisible } = HeaderPropsMap.get(layout) as App.HeaderProps;
   return (
     <SkDarkWrapper className={cx(baseStyles.hFull, baseStyles.flexYCenter, styles.appHeader)}>
-      <SkCollapse />
+      { logoVisible && <SkLogo showTitle={true} className={cx(styles.logoWidth)} /> }
+      { collapseVisible && <SkCollapse /> }
       <div id={APP_HEADER_MENU_ID} className={ cx(baseStyles.hFull, baseStyles.flexYCenter, baseStyles.flex1Hidden) }>
-        <SkBreadcrumb />
+        { breadcrumbVisible && <SkBreadcrumb /> }
       </div>
       <div className={ cx(baseStyles.hFull, baseStyles.flexYCenter, baseStyles.justifyEnd) }>
         <SkThemeButton />

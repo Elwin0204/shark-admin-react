@@ -11,7 +11,7 @@ import { useAppStore, useThemeStore } from '@/stores';
 import { Suspense } from 'react';
 import SkThemeDrawer from '@/components/layouts/SkThemeDrawer';
 import SkMenu from '@/components/layouts/SkMenu';
-import MenuProvider from './MenuProvider';
+import MenuProvider from '../providers/MenuProvider';
 
 const BaseLayout: React.FC = () => {
   const { styles: baseStyles } = useBaseStyles();
@@ -19,22 +19,23 @@ const BaseLayout: React.FC = () => {
   const { collapse } = useAppStore();
   const { layout } = useThemeStore();
   const sidebarWidth = collapse ? styles.sidebarCollapseWidth : styles.sidebarWidth;
-  const leftGap = collapse ? styles.leftGapCollapse : styles.leftGap;
+  const sidebarVisible = layout !== "horizontal";
+  const leftGap = sidebarVisible ? collapse ? styles.leftGapCollapse : styles.leftGap : "";
   const showLogo = layout !== "horizontal-mix" && layout !== "vertical-mix";
 
   return (
     <div className={ cx(baseStyles.hFull, baseStyles.flexCol, baseStyles.transitionAll300) }>
       <header className={ cx(baseStyles.flexShrink0, baseStyles.transitionAll300, baseStyles.wFull, styles.appHeader, leftGap) }>
-        <SkAppHeader />
+        <SkAppHeader layout={layout} />
       </header>
       <div className={ cx(baseStyles.flexShrink0, baseStyles.overflowHidden, styles.appHeaderPlacement) }></div>
       <div className={ cx(baseStyles.flexShrink0, baseStyles.transitionAll300, baseStyles.wFull, styles.appTabsBar, leftGap) }>
         <SkTabsBar />
       </div>
       <div className={ cx(baseStyles.flexShrink0, baseStyles.overflowHidden, styles.appTabsBarPlacement) }></div>
-      <aside className={ cx(baseStyles.hFull, baseStyles.transitionAll300, styles.appSideBar, sidebarWidth) }>
+      {sidebarVisible && <aside className={ cx(baseStyles.hFull, baseStyles.transitionAll300, styles.appSideBar, sidebarWidth) }>
         <SKSideBar showLogo={showLogo} collapse={collapse} />
-      </aside>
+      </aside>}
       <main className={ cx(baseStyles.flexCol, baseStyles.flexGrow, baseStyles.transitionAll300, baseStyles.overflowYAuto, styles.appMain, leftGap) }>
         <Outlet />
       </main>

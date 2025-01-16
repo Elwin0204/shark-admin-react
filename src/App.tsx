@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import { ConfigProvider } from 'antd'
+import AppProvider from './providers/AppProvider'
 import zhCN from 'antd/es/locale/zh_CN'
 import 'antd/dist/reset.css'
 import './App.css'
@@ -18,7 +19,7 @@ declare module 'antd-style' {
   export interface CustomToken extends ThemeState {}
 }
 
-const App: React.FC = () => {
+const AppRoot: React.FC = () => {
   const { primaryColor } = useAppStore()
   const customToken = useThemeStore()
   return (
@@ -29,14 +30,16 @@ const App: React.FC = () => {
           token: { colorPrimary: primaryColor },
         }}
       >
-        <Suspense fallback={<SkLoading />}>
-          <RouterGuard>
-            <Router />
-          </RouterGuard>
-        </Suspense>
+        <AppProvider>
+          <Suspense fallback={<SkLoading />}>
+            <RouterGuard>
+              <Router />
+            </RouterGuard>
+          </Suspense>
+        </AppProvider>
       </ConfigProvider>
     </ThemeProvider>
   )
 }
 
-export default App
+export default AppRoot

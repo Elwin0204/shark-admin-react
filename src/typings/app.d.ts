@@ -15,4 +15,10 @@ declare namespace App {
     children?: Menu[];
     _children?: Menu[];
   }
+
+  interface HeaderProps {
+    logoVisible: boolean;
+    collapseVisible: boolean;
+    breadcrumbVisible: boolean;
+  }
 }

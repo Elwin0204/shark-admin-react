@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Form, Input, Button, Alert } from 'antd'
+import { Form, Input, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useUserStore } from '@/stores/index'
 import useStyles from './style'
@@ -24,7 +24,6 @@ const Login: React.FC = () => {
   }
   return (
     <div className={ styles.container }>
-      <Alert type="success" message="What's up, guys. Welcome to shark-admin" closable style={ {position: 'fixed', width: '100%' } } />
       <div className={ styles.dialog }>
         <Form
           form={form}

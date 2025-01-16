@@ -1,4 +1,3 @@
-import { ExtendedRouteObject } from "@/typings/router";
 import { createContext } from "react";
 
 export interface MixMenuContextProps {
@@ -11,7 +10,6 @@ export interface MixMenuContextProps {
   selectedKeys: string[];
   openKeys: string[];
   setOpenKeys: (openKeys: string[]) => void;
-  route: ExtendedRouteObject | null;
 }
 
 function voidFunc () {}
@@ -26,5 +24,4 @@ export const MixMenuContext = createContext<MixMenuContextProps>({
   selectedKeys: [],
   openKeys: [],
   setOpenKeys: voidFunc,
-  route: {}
 });

@@ -1,14 +1,24 @@
 import { createStyles } from 'antd-style'
 
-import bg from '../../assets/images/bg.jpg'
-
 export default createStyles(({ token, css }) => ({
-  container: {
-    height: '100vh',
-    position: 'relative',
-    backgroundImage: `url(${bg})`,
-    backgroundSize: 'cover'
-  },
+  container: css`
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    animation: gradientAnimate 15s ease infinite;
+    @keyframes gradientAnimate {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    };
+  `,
   dialog: {
     width: 450,
     backgroundColor: 'rgba(255, 255, 255, 0.15)',
@@ -54,7 +64,6 @@ export default createStyles(({ token, css }) => ({
     width: '100%',
     height: 50,
     marginTop: 5,
-    // border: 0,
   },
   waveContainer: {
     position: 'absolute',
@@ -106,5 +115,5 @@ export default createStyles(({ token, css }) => ({
       animation-delay: -5s;
       animation-duration: 20s;
     }
-  `, // 背景色
+  `,
 }))

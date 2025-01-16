@@ -5,7 +5,6 @@
 
 import { create } from 'zustand'
 import { createJSONStorage, persist } from "zustand/middleware"
-import { baseMessage, baseNotify } from '@/utils/global'
 import { login } from '@/api/user'
 import settings from '@/config/index'
 import { UserInfo } from '@/api/user/types'
@@ -31,7 +30,6 @@ interface UserState {
 const useUserStore = create<UserState>()(
   persist(
     (set, get) => ({
-      // accessToken: getAccessToken(),
       accessToken: null,
       userInfo: null,
       avatar: [],
@@ -59,7 +57,7 @@ const useUserStore = create<UserState>()(
         }
         
         if (!data) {
-          baseMessage('info', '验证失败，请重新登录...')
+          window.$message.info({ content: '验证失败，请重新登录...' });
           return false
         }
         const { roles, username, nickname, avatar } = data
@@ -68,7 +66,7 @@ const useUserStore = create<UserState>()(
           set(() => ({ roles, userInfo, avatar }))
           return roles
         } else {
-          baseMessage('info', '用户信息接口异常')
+          window.$message.info({ content: '用户信息接口异常' });
           return false
         }
       },
@@ -90,12 +88,9 @@ const useUserStore = create<UserState>()(
               : hour < 18
               ? '下午好'
               : '晚上好'
-          baseNotify('success', {
-            message: `欢迎登录${title}`,
-            description: `${thisTime}!`,
-          })
+          window.$notification.success({ message: `欢迎登录${title}`, description: `${thisTime}!` });
         } else {
-          baseMessage('error', `登录接口异常，未正确返回${tokenName}...`)
+          window.$message.error({ content: `登录接口异常，未正确返回${tokenName}...` });
         }
         return accessToken
       },
