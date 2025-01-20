@@ -24,6 +24,7 @@ export default createStyles(({ token, css }) => ({
     backgroundColor: 'rgba(255, 255, 255, 0.15)',
     borderRadius: 10,
     position: 'absolute',
+    zIndex: '2',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -70,6 +71,7 @@ export default createStyles(({ token, css }) => ({
     bottom: 0,
     left: 0,
     width: '100%',
+    zIndex: '1'
   },
   wave: {
     position: 'relative',

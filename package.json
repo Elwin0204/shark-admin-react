@@ -25,6 +25,7 @@
     "antd": "^5.23.0",
     "antd-style": "^3.6.1",
     "axios": "^1.6.5",
+    "colord": "^2.9.3",
     "dayjs": "^1.11.10",
     "event-bus-hooks": "^1.0.8",
     "jsencrypt": "^3.3.2",

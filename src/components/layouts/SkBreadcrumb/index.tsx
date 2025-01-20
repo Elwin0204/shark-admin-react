@@ -22,11 +22,9 @@ const SkBreadcrumb: React.FC<SkBreadcrumbProps> = (props) => {
   const navigator = useNavigate();
   const { allMenus: menus } = useMixMenuContext();
   const breadcrumbs = getBreadcrumbs(pathname, menus);
-  console.log("breadcrumbs", breadcrumbs);
+
   const handleMenuClick: MenuProps["onClick"] = ({ key }) => {
-    console.log("key", key, breadcrumbs);
     const targetKey = findLastLevelKey(key, breadcrumbs);
-    console.log("targetKey", targetKey);
     if(targetKey) {
       navigator(targetKey);
     }

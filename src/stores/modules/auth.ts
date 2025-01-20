@@ -24,12 +24,9 @@ const useAuthStore = create<AuthState>()(
     currentRoute: null,
     setCurrentRoute: (route) => set(() => ({ currentRoute: route })),
     fetchPermissions: async () => {
-      console.log("执行了");
       try {
         const { data } = await getAuthMenu({ username: "" });
         const { authRoutes, authBtns } = convertToRoutesAndBtns(data);
-        console.log("authRoutes", authRoutes);
-        console.log("authBtns", authBtns);
         // 设置权限路由
         set(() => ({ authRoutes }));
         set(() => ({ authBtns }));

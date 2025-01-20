@@ -37,7 +37,7 @@ const HeaderPropsMap = new Map<UnionKey.LayoutMode, App.HeaderProps>([
     {
       logoVisible: true,
       collapseVisible: false,
-      breadcrumbVisible: true,
+      breadcrumbVisible: false,
     }
   ],
 ]);

@@ -1,4 +1,3 @@
-import SkOverflowTooltip from "@/components/ui/SkOverflowTooltip";
 import { ExtendedRouteObject } from "@/typings/router";
 import { buildFullPath } from "@/router/shared/routerUtils";
 
@@ -67,3 +66,29 @@ export const getOpenKeys = (fullPath: string): string[] => {
     }, { accumulatedPath: '', parentPaths: [] })
     .parentPaths;
 };
+
+export function getActiveFirstLevelMenuKey(menus: App.Menu[], pathname: string): string {
+  console.log("fist", menus, pathname);
+  // 辅助函数：检查当前菜单或其子菜单是否包含给定路径
+  const matchesPath = (menu: App.Menu, path: string): boolean => {
+    if (menu.key) {
+      if (menu.key === pathname) return true;
+    }
+
+    if (menu.children && menu.children.length > 0) {
+      return menu.children.some(child => matchesPath(child, path));
+    }
+
+    return false;
+  };
+
+  // 遍历菜单项，找到第一个匹配的最顶层菜单
+  for (const menu of menus) {
+    if (matchesPath(menu, pathname)) {
+      return menu.key;
+    }
+  }
+
+  // 如果没有找到匹配项，则返回 undefined
+  return "";
+}

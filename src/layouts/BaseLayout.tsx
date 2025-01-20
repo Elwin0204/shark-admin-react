@@ -18,14 +18,30 @@ const BaseLayout: React.FC = () => {
   const { styles, cx } = useStyles();
   const { collapse } = useAppStore();
   const { layout } = useThemeStore();
-  const sidebarWidth = collapse ? styles.sidebarCollapseWidth : styles.sidebarWidth;
+  const sidebarWidth = getSidebarWidth();
+  const sidebarPadding = layout === "horizontal-mix" ? styles.sidebarPaddingTop : "";
   const sidebarVisible = layout !== "horizontal";
-  const leftGap = sidebarVisible ? collapse ? styles.leftGapCollapse : styles.leftGap : "";
+  const leftGap = getLeftGap();
+  const headerLeftGap = layout === "horizontal-mix" ? "" : leftGap;
   const showLogo = layout !== "horizontal-mix" && layout !== "vertical-mix";
+
+  function getSidebarWidth() {
+    if(layout === "horizontal-mix" || layout === "vertical-mix") {
+      return styles.sidebarMixWidth;
+    }
+    return collapse ? styles.sidebarCollapseWidth : styles.sidebarWidth;
+  }
+
+  function getLeftGap() {
+    if(layout === "horizontal-mix") {
+      return styles.leftGapMix;
+    }
+    return sidebarVisible ? collapse ? styles.leftGapCollapse : styles.leftGap : "";
+  }
 
   return (
     <div className={ cx(baseStyles.hFull, baseStyles.flexCol, baseStyles.transitionAll300) }>
-      <header className={ cx(baseStyles.flexShrink0, baseStyles.transitionAll300, baseStyles.wFull, styles.appHeader, leftGap) }>
+      <header className={ cx(baseStyles.flexShrink0, baseStyles.transitionAll300, baseStyles.wFull, styles.appHeader, headerLeftGap) }>
         <SkAppHeader layout={layout} />
       </header>
       <div className={ cx(baseStyles.flexShrink0, baseStyles.overflowHidden, styles.appHeaderPlacement) }></div>
@@ -33,7 +49,7 @@ const BaseLayout: React.FC = () => {
         <SkTabsBar />
       </div>
       <div className={ cx(baseStyles.flexShrink0, baseStyles.overflowHidden, styles.appTabsBarPlacement) }></div>
-      {sidebarVisible && <aside className={ cx(baseStyles.hFull, baseStyles.transitionAll300, styles.appSideBar, sidebarWidth) }>
+      {sidebarVisible && <aside className={ cx(baseStyles.hFull, baseStyles.transitionAll300, styles.appSideBar, sidebarWidth, sidebarPadding) }>
         <SKSideBar showLogo={showLogo} collapse={collapse} />
       </aside>}
       <main className={ cx(baseStyles.flexCol, baseStyles.flexGrow, baseStyles.transitionAll300, baseStyles.overflowYAuto, styles.appMain, leftGap) }>

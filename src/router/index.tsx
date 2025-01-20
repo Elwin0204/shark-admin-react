@@ -1,7 +1,7 @@
 import { Navigate, useRoutes } from 'react-router-dom'
 import BaseLayout from '@/layouts/BaseLayout'
-import Login from '@/pages/Login'
-import Index from "@/pages/Index"
+import Login from '@/pages/login'
+import Index from "@/pages/index"
 import { EagerRouteModules, ExtendedRouteObject } from '@/typings/router'
 
 const metaRoutes: EagerRouteModules = import.meta.glob("./modules/*.tsx", { eager: true })

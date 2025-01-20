@@ -8,7 +8,7 @@ const HorizontalMix: React.FC = () => {
   if(!container) return null;
 
   return [
-    <Horizontal key="horizontal" />,
+    <Horizontal mode="2" key="horizontal" />,
     createPortal(<FirstLevelMenu key="first-level-menu" />, container)
   ];
 }

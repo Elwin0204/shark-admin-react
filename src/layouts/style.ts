@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 
 export default createStyles(({ token, css }) => {
-  const { baseSidebarWidth, baseSidebarCollapseWidth, baseHeaderZindex, baseHeaderHeight, baseTabsBarHeight, baseTabsBarZindex, baseSideBarZindex, baseFooterZindex, baseFooterHeight } = token;
+  const { baseSidebarWidth, baseSidebarCollapseWidth, baseSidebarMixWidth, baseHeaderZindex, baseHeaderHeight, baseTabsBarHeight, baseTabsBarZindex, baseSideBarZindex, baseFooterZindex, baseFooterHeight } = token;
   return {
     appHeader: css`
       z-index: ${baseHeaderZindex};
@@ -38,11 +38,20 @@ export default createStyles(({ token, css }) => {
     sidebarCollapseWidth: css`
       width: ${baseSidebarCollapseWidth}px;
     `,
+    sidebarMixWidth: css`
+      width: ${baseSidebarMixWidth}px;
+    `,
+    sidebarPaddingTop: css`
+      padding-top: ${baseHeaderHeight}px;
+    `,
     leftGap: css`
       padding-left: ${baseSidebarWidth}px;
     `,
     leftGapCollapse: css`
       padding-left: ${baseSidebarCollapseWidth}px;
+    `,
+    leftGapMix: css`
+      padding-left: ${baseSidebarMixWidth}px;
     `,
     appFooter: css`
       z-index: ${baseFooterZindex};

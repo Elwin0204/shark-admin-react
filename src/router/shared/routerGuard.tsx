@@ -1,4 +1,4 @@
-// import { pendingRequestManager } from "@/utils/pendingRequestManager";
+import { pendingRequestManager } from "@/utils/pendingRequestManager";
 import { useLocation, useNavigate } from "react-router-dom";
 import { rootRoutes } from "..";
 import { matchRoute } from "./routerUtils";

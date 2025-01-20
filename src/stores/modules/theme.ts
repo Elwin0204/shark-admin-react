@@ -4,7 +4,7 @@
  */
 import { create } from 'zustand'
 import defaultSettings from '@/config/index'
-import { getNextThemeMode } from '../shared/theme.util';
+import { getDarkMode, getNextThemeMode } from '../shared/theme.util';
 
 const {
   layout,
@@ -14,6 +14,7 @@ const {
 export interface ThemeState {
   layout: UnionKey.LayoutMode;
   themeMode: UnionKey.ThemeMode;
+  isDarkMode: boolean;
   primaryColor: string;
   //框架默认主题色
   baseColorDefault: string;
@@ -86,12 +87,9 @@ export interface ThemeState {
   baseSidebarWidth: number;
   // 左侧菜单折叠时的宽度
   baseSidebarCollapseWidth: number;
+  baseSidebarMixWidth: number;
   //纵向布局时左侧导航未折叠时右侧内容的宽度
   baseRightContentWidth: () => string;
-  //纵向布局时左侧导航已折叠时的宽度
-  baseLeftMenuWidthMin: number;
-  //纵向布局时左侧导航已折叠时右侧内容的宽度
-  baseRightContentWidthMin: () => string;
   //默认动画
   baseTransition: string;
   //默认动画长
@@ -103,6 +101,7 @@ const useThemeStore = create<ThemeState>()(
   (set, get) => ({
     layout: layout as UnionKey.LayoutMode,
     themeMode: themeMode as UnionKey.ThemeMode,
+    isDarkMode: getDarkMode(themeMode as UnionKey.ThemeMode),
     primaryColor: '#247fff',
     baseColorDefault: '#5E7CE0',
     baseZindex: 999,
@@ -147,7 +146,7 @@ const useThemeStore = create<ThemeState>()(
     baseMenuItemHeight: 50,
     baseSidebarWidth: 220,
     baseSidebarCollapseWidth: 64,
-    baseLeftMenuWidthMin: 65,
+    baseSidebarMixWidth: 90,
     baseTransition: 'all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border 0s background 0s, color 0s, font-size 0s',
     baseTransitionTime: '0.3s',
     setLayout: (layout: UnionKey.LayoutMode) => set(() => ({ layout: layout })),
@@ -163,9 +162,6 @@ const useThemeStore = create<ThemeState>()(
     },
     baseRightContentWidth: () => {
       return `calc(100% - ${get().baseSidebarWidth}px)`
-    },
-    baseRightContentWidthMin: () => {
-      return `calc(100% - ${get().baseLeftMenuWidthMin}px)`
     },
     setColor: (color) => set(() => ({ primaryColor: color })),
   }),

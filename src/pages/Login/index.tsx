@@ -4,6 +4,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useUserStore } from '@/stores/index'
 import useStyles from './style'
 import { useNavigate } from 'react-router-dom'
+import SkBubble from '@/components/ui/SkBubble'
 
 const Login: React.FC = () => {
   const { styles } = useStyles()
@@ -78,6 +79,9 @@ const Login: React.FC = () => {
             <use xlinkHref="#JS_BaseWave" x="48" y="7" fill="#fff" />
           </g>
         </svg>
+      </div>
+      <div style={{ position: "absolute", left: "0", top: "0" }}>
+        <SkBubble />
       </div>
     </div>
   )

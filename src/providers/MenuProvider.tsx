@@ -1,5 +1,5 @@
 import { useAppStore, useAuthStore, useTabStore } from "@/stores";
-import { getMenusByAuthRoutes, getOpenKeys } from "./utils/MenuUtils";
+import { getActiveFirstLevelMenuKey, getMenusByAuthRoutes, getOpenKeys } from "./utils/MenuUtils";
 import { MixMenuContext } from "@/layouts/context";
 
 interface Props {
@@ -30,12 +30,11 @@ const MenuProvider: React.FC<Props> = ({ children }) => {
     }) as App.Menu[],
     [menus]
   );
-
   const childLevelMenus = useMemo(() => menus.find((item) => item.key === activeFirstLevelMenuKey)?.children as App.Menu[], [activeFirstLevelMenuKey, menus]);
-
+  console.log("123activeFirstLevelMenuKey", activeFirstLevelMenuKey);
   const mixMenuContext = {
     allMenus: menus,
-    activeFirstLevelMenuKey,
+    activeFirstLevelMenuKey: activeFirstLevelMenuKey,
     setActiveFirstLevelMenuKey: setActiveFirstLevelMenuKey,
     firstLevelMenu,
     selectedKeys,

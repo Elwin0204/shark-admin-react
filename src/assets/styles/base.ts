@@ -24,6 +24,12 @@ export default createStyles(({ token, css }) => {
       justify-content: center;
       align-items: center;
     `,
+    flexColCenter: css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    `,
     flexYCenter: css`
       display: flex;
       align-items: center;
@@ -58,8 +64,21 @@ export default createStyles(({ token, css }) => {
     textCenter: css`
       text-align: center;
     `,
+    ellipsisText: css`
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    `,
     textIcon: css`
       font-size: 1.125rem;
+      line-height: 1;
+    `,
+    textIconSmall: css`
+      font-size: 1rem;
+      line-height: 1;
+    `,
+    textIconLarge: css`
+      font-size: 1.5rem;
       line-height: 1;
     `,
     overflowHidden: css`
