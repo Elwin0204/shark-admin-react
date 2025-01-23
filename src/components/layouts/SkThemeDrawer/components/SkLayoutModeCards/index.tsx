@@ -1,7 +1,7 @@
 
 import { Tooltip } from 'antd';
 import useStyles from "./style";
-import useThemeStore from '@/stores/modules/theme';
+import { useThemeStore } from '@/stores';
 
 const SkLayoutModeCards: React.FC = () => {
   const { styles, cx } = useStyles();

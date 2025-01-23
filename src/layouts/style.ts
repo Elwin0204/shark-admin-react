@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 
 export default createStyles(({ token, css }) => {
-  const { baseSidebarWidth, baseSidebarCollapseWidth, baseSidebarMixWidth, baseHeaderZindex, baseHeaderHeight, baseTabsBarHeight, baseTabsBarZindex, baseSideBarZindex, baseFooterZindex, baseFooterHeight } = token;
+  const { baseSidebarWidth, baseSidebarCollapseWidth, baseSidebarMixWidth, baseSidebarVerticalMixWidth, baseHeaderZindex, baseHeaderHeight, baseTabsBarHeight, baseTabbarZindex, baseSideBarZindex, baseFooterZindex, baseFooterHeight } = token;
   return {
     appHeader: css`
       z-index: ${baseHeaderZindex};
@@ -13,14 +13,14 @@ export default createStyles(({ token, css }) => {
     appHeaderPlacement: css`
       height: ${baseHeaderHeight}px;
     `,
-    appTabsBar: css`
-      z-index: ${baseTabsBarZindex};
+    appTabBar: css`
+      z-index: ${baseTabbarZindex};
       height: ${baseTabsBarHeight}px;
       position: absolute;
       left: 0;
       top: ${baseHeaderHeight}px;
     `,
-    appTabsBarPlacement: css`
+    appTabBarPlacement: css`
       height: ${baseTabsBarHeight}px;
     `,
     appSideBar: css`
@@ -41,6 +41,9 @@ export default createStyles(({ token, css }) => {
     sidebarMixWidth: css`
       width: ${baseSidebarMixWidth}px;
     `,
+    sidebarVerticalMixWidth: css`
+      width: ${baseSidebarVerticalMixWidth}px;
+    `,
     sidebarPaddingTop: css`
       padding-top: ${baseHeaderHeight}px;
     `,
@@ -53,9 +56,15 @@ export default createStyles(({ token, css }) => {
     leftGapMix: css`
       padding-left: ${baseSidebarMixWidth}px;
     `,
+    leftGapVerticalMix: css`
+      padding-left: ${baseSidebarVerticalMixWidth}px;
+    `,
     appFooter: css`
       z-index: ${baseFooterZindex};
       height: ${baseFooterHeight}px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
     `,
     appFooterPlacement: css`
       height: ${baseFooterHeight}px;

@@ -1,14 +1,14 @@
 import { Breadcrumb, BreadcrumbItemProps, BreadcrumbProps, MenuProps } from "antd";
 import { findLastLevelKey, getBreadcrumbs } from "./shared";
 import { cloneElement } from "react";
-import useBaseStyle from "@/assets/styles/base";
-import useStyle from "./style";
+import useBaseStyles from "@/assets/styles/base";
+import useStyles from "./style";
 
 type SkBreadcrumbProps = Omit<BreadcrumbItemProps, "items">;
 
 function BreadcrumbContent({ label, icon, children }: { label: JSX.Element; icon: JSX.Element, children: App.Menu[] }) {
-  const { styles: baseStyles, cx } = useBaseStyle();
-  const { styles } = useStyle();
+  const { styles: baseStyles, cx } = useBaseStyles();
+  const { styles } = useStyles();
   return (
     <div className={cx(baseStyles.iFlexYCenter, baseStyles.alignMiddle, children && children.length > 0 ? baseStyles.cursorPointer : "")}>
       {cloneElement(icon, { className: cx(baseStyles.textIcon, styles.breadcrumbIcon), ...icon.props })}

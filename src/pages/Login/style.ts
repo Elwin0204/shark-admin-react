@@ -118,4 +118,24 @@ export default createStyles(({ token, css }) => ({
       animation-duration: 20s;
     }
   `,
+  shark: css`
+    @keyframes swim {
+      0% {
+        transform: translate(0, 0) scaleX(1);
+      }
+      50% {
+        transform: translate(calc(100vw - 80px), 0) scaleX(1);
+      }
+      50.1% {
+        transform: translate(calc(100vw - 80px), 0) scaleX(-1);
+      }
+      100% {
+        transform: translate(0, 0) scaleX(-1);
+      }
+    }
+    position: absolute;
+    bottom: 150px;
+    left: 10px;
+    animation: swim 13s infinite linear;
+  `
 }))

@@ -57,9 +57,18 @@ export default createStyles(({ token, css }) => {
     justifyEnd: css`
       justify-content: flex-end;
     `,
+    justifyBetween: css`
+      justify-content: space-between;
+    `,
     iFlexYCenter: css`
       display: inline-flex;
       align-items: center;
+    `,
+    relative: css`
+      position: relative;
+    `,
+    absolute: css`
+      position: absolute;
     `,
     textCenter: css`
       text-align: center;
@@ -101,6 +110,9 @@ export default createStyles(({ token, css }) => {
       transition-property: all;
       transition-timing-function: cubic-bezier(.4,0,.2,1);
       transition-duration: .3s;
+    `,
+    settingItem: css`
+      gap: 23.5px;
     `
   }
 })

@@ -1,22 +1,17 @@
 import { useThemeStore } from "@/stores";
 import useStyles from "./style";
-
-const icons: Record<UnionKey.ThemeMode, string> = {
-  light: 'akar-icons:sun',
-  dark: 'solar:moon-sleep-outline',
-  auto: 'material-symbols:brightness-auto-outline-rounded'
-};
+import { THEME_MODE_RECORDS } from "@/const/app";
 
 const SkThemeModeToggle: React.FC = () => {
   const { styles, cx } = useStyles();
-  const { themeMode, toggleThemeMode } = useThemeStore();
+  const { themeMode, setThemeMode } = useThemeStore();
   return (
     <SkButton
       tooltipTitle="主题模式"
-      onClick={ () => toggleThemeMode() }
+      onClick={ () => setThemeMode() }
       buttonClass={cx(styles.skDarkModeButton)}
     >
-      <SvgIcon icon={icons[themeMode]} />
+      <SvgIcon icon={THEME_MODE_RECORDS[themeMode]} />
     </SkButton>
   );
 };

@@ -218,16 +218,16 @@ const SkBubble: React.FC = () => {
         canvasH = canvasRef.current!.height = window.innerHeight;
       }
       
-      window.addEventListener('resize', function() {
-        onResize();
-      });
-
+      window.addEventListener('resize', onResize);
       canvasRef.current.addEventListener('click', handleCanvasClick, false);
 
-      // // 清理函数：移除事件监听器
-      // return () => {
-      //   canvasRef.current!.removeEventListener('click', handleCanvasClick);
-      // };
+      // 清理函数：移除事件监听器
+      return () => {
+        window.removeEventListener('resize', onResize);
+        if (canvasRef.current) {
+          canvasRef.current.removeEventListener('click', handleCanvasClick, false);
+        }
+      };
     }
   }, []);
   

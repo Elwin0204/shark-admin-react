@@ -1,6 +1,6 @@
 import { cloneElement } from "react";
-import useBaseStyle from '@/assets/styles/base';
-import useStyle from "../../style";
+import useBaseStyles from '@/assets/styles/base';
+import useStyles from "../../style";
 import { transformColorWithOpacity } from "@/utils/color";
 import { useThemeStore } from "@/stores";
 
@@ -22,8 +22,8 @@ function MixMenuItem(Props: MixMenuItemProps) {
   const { menu: { icon, label, key, children }, active, inverted, onClick, setActiveFirstLevelMenuKey } = Props;
   const { isDarkMode, primaryColor } = useThemeStore();
   const navigator = useNavigate();
-  const { styles: baseStyles, cx } = useBaseStyle();
-  const { styles } = useStyle();
+  const { styles: baseStyles, cx } = useBaseStyles();
+  const { styles } = useStyles();
 
   const selectedBgColor = useMemo(() => {
     const light = transformColorWithOpacity(primaryColor, 0.1, '#ffffff');
@@ -52,9 +52,9 @@ function MixMenuItem(Props: MixMenuItemProps) {
 }
 
 const FirstLevelMenu: React.FC<Props> = memo(({ children, inverted, onSelect }) => {
-  const { styles: baseStyles, cx } = useBaseStyle();
+  const { styles: baseStyles, cx } = useBaseStyles();
   const { allMenus, activeFirstLevelMenuKey, setActiveFirstLevelMenuKey } = useMixMenuContext();
-  console.log("activeFirstLevelMenuKey",allMenus, activeFirstLevelMenuKey);
+
   return (
     <div className={cx(baseStyles.hFull, baseStyles.flexColStretch, baseStyles.flex1Hidden)}>
       {children}

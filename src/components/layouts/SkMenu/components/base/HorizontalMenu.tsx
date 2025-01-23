@@ -1,6 +1,6 @@
 import { Menu, MenuProps } from "antd";
-import useBaseStyle from '@/assets/styles/base';
-import useStyle from "../../style";
+import useBaseStyles from '@/assets/styles/base';
+import useStyles from "../../style";
 
 interface Props {
   mode: UnionKey.MenuMode;
@@ -11,8 +11,8 @@ function isHasChildren(menus: App.Menu[], key: string) {
 }
 
 const HorizontalMenu: React.FC<Props> = ({ mode }) => {
-  const { styles: baseStyles, cx } = useBaseStyle();
-  const { styles } = useStyle();
+  const { styles: baseStyles, cx } = useBaseStyles();
+  const { styles } = useStyles();
   const navigator = useNavigate();
   const { allMenus, childLevelMenus, firstLevelMenu, selectedKeys } = useMixMenuContext();
   const menuMap = new Map<UnionKey.MenuMode, App.Menu[]>([

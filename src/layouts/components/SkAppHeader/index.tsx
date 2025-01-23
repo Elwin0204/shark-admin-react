@@ -27,8 +27,8 @@ const HeaderPropsMap = new Map<UnionKey.LayoutMode, App.HeaderProps>([
   [
     "vertical-mix",
     {
-      logoVisible: true,
-      collapseVisible: true,
+      logoVisible: false,
+      collapseVisible: false,
       breadcrumbVisible: true,
     }
   ],
@@ -44,9 +44,10 @@ const HeaderPropsMap = new Map<UnionKey.LayoutMode, App.HeaderProps>([
 
 interface Props {
   layout: UnionKey.LayoutMode;
+  breadcrumb: boolean;
 }
 
-const SkAppHeader: React.FC<Props> = ({ layout }) => {
+const SkAppHeader: React.FC<Props> = ({ layout, breadcrumb }) => {
   const { styles: baseStyles } = useBaseStyles();
   const { styles, cx } = useStyles();
   const { logoVisible, collapseVisible, breadcrumbVisible } = HeaderPropsMap.get(layout) as App.HeaderProps;
@@ -55,7 +56,7 @@ const SkAppHeader: React.FC<Props> = ({ layout }) => {
       { logoVisible && <SkLogo showTitle={true} className={cx(styles.logoWidth)} /> }
       { collapseVisible && <SkCollapse /> }
       <div id={APP_HEADER_MENU_ID} className={ cx(baseStyles.hFull, baseStyles.flexYCenter, baseStyles.flex1Hidden) }>
-        { breadcrumbVisible && <SkBreadcrumb /> }
+        { breadcrumb && breadcrumbVisible && <SkBreadcrumb /> }
       </div>
       <div className={ cx(baseStyles.hFull, baseStyles.flexYCenter, baseStyles.justifyEnd) }>
         <SkThemeButton />

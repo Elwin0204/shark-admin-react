@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { pendingRequestManager, PendingRequestManager } from "./pendingRequestManager";
-import settings from "@/config";
+import defaultSettings from "@/config";
 
-const { invalidCode, noPermissionCode, noFoundCode, baseURL, requestTimeout, contentType } = settings;
+const { invalidCode, noPermissionCode, noFoundCode, baseURL, requestTimeout, contentType } = defaultSettings;
 
 const defaultConfig = {
   baseURL,

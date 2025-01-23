@@ -12,6 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@ant-design/colors": "^7.2.0",
     "@ant-design/icons": "^5.2.6",
     "@ant-design/plots": "^2.1.12",
     "@ant-design/pro-components": "^2.6.48",
@@ -22,8 +23,8 @@
     "@types/jest": "^29.5.11",
     "@types/node": "^20.11.5",
     "ahooks": "^3.8.4",
-    "antd": "^5.23.0",
-    "antd-style": "^3.6.1",
+    "antd": "^5.23.2",
+    "antd-style": "^3.7.1",
     "axios": "^1.6.5",
     "colord": "^2.9.3",
     "dayjs": "^1.11.10",

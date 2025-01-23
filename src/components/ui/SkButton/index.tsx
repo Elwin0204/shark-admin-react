@@ -11,6 +11,7 @@ interface Props extends Omit<ButtonProps, "icon" | "iconPosition"> {
   tooltipTitle?: string;
   tooltipPlacement?: TooltipPlacement;
   iconStyle?: CSSProperties;
+  triggerParent?: boolean;
   children?: React.ReactNode;
 }
 
@@ -20,13 +21,19 @@ const SkButton: React.FC<Props> = ({
   tooltipTitle,
   tooltipPlacement = "bottom",
   iconStyle,
+  triggerParent,
   children,
   ...rest
 }) => {
   const { styles: baseStyles } = useBaseStyles();
   const { styles, cx } = useStyles();
+
+  function getPopupContainer(triggerNode: HTMLElement) {
+    return triggerParent ? triggerNode.parentElement! : document.body;
+  }
+
   return (
-    <Tooltip title={tooltipTitle} placement={tooltipPlacement}>
+    <Tooltip title={tooltipTitle} placement={tooltipPlacement} getPopupContainer={getPopupContainer}>
       <Button type="text" className={cx(styles.skButton, baseStyles.textIcon, buttonClass)} { ...rest }>
         {
           children || (

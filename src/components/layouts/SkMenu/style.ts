@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 
 export default createStyles(({ token, css }) => {
-  const { baseHeaderHeight } = token;
+  const { baseHeaderHeight, baseSidebarMixChildWidth } = token;
   return {
     horizontalMenu: css`
       line-height: ${baseHeaderHeight}px;
@@ -19,6 +19,28 @@ export default createStyles(({ token, css }) => {
       &:hover {
         background: rgba(0, 0, 0, 0.08);
       }
+    `,
+    verticalMixLogo: css`
+      height: ${baseHeaderHeight}px;
+    `,
+    verticalMixChild: css`
+      width: ${baseSidebarMixChildWidth}px;
+    `,
+    verticalMixChildZero: css`
+      width: 0px;
+    `,
+    verticalMixDarkWrapper: css`
+      position: absolute;
+      left: 0;
+      top: 0;
+      box-shadow: 0 0 rgba(0, 0, 0, 0);
+    `,
+    verticalMixHeader: css`
+      height: ${baseHeaderHeight}px;
+      padding: 0 12px;
+    `,
+    verticalMixHeaderTitle: css`
+      font-size: 16px;
     `
   }
 })

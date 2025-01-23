@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style'
 
 export default createStyles(({ token, css }) => {
-  const { colorPrimary, colorPrimaryBgHover, colorPrimaryBg, boxShadow } = token;
+  const { colorPrimary, colorPrimaryBgHover, colorPrimaryBg } = token;
   return {
     layoutCards: css`
       position: relative;
@@ -80,7 +80,7 @@ export default createStyles(({ token, css }) => {
       transition: all 0.2s;
       box-shadow: 0 0 5px 1px rgba(0,0,0,0.15);
       & .card-dark {
-        background-color: ${colorPrimary};
+        background-color: ${colorPrimary}; 
         border-radius: 4px;
       }
 

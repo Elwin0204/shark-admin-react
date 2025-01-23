@@ -3,6 +3,7 @@ import { Divider, Drawer } from "antd";
 import useBaseStyles from '@/assets/styles/base';
 import useStyles from "./style";
 import SkLayoutModeCards from "./components/SkLayoutModeCards";
+import SkThemeColor from "./components/SkThemeColor";
 
 const SkThemeDrawer: React.FC = () => {
   const { styles: baseStyles } = useBaseStyles();
@@ -28,12 +29,14 @@ const SkThemeDrawer: React.FC = () => {
           主题颜色
         </span>
       </Divider>
+      <SkThemeColor />
       <Divider style={{ borderColor: '#bfbfbf' }}>
         <span className={cx(baseStyles.flexCenter)}>
           <SvgIcon icon="ant-design:setting-outlined" className={cx(styles.dividerIcon)} />
           页面设置
         </span>
       </Divider>
+      <SkPageSettings />
     </Drawer>
   );
 }

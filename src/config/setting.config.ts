@@ -43,8 +43,6 @@ const setting = {
   loginAuto: false,
   //vertical布局时是否只保持一个子菜单的展开
   uniqueOpened: true,
-  //vertical布局时默认展开的菜单path，使用逗号隔开建议只展开一个
-  defaultOopeneds: ['/sk'],
   //是否显示终端donation打印
   donation: true,
   homeUrl: "/index",

@@ -5,6 +5,7 @@ import { useUserStore } from '@/stores/index'
 import useStyles from './style'
 import { useNavigate } from 'react-router-dom'
 import SkBubble from '@/components/ui/SkBubble'
+import IMG_Shark from "@/assets/images/shark.png"
 
 const Login: React.FC = () => {
   const { styles } = useStyles()
@@ -83,6 +84,7 @@ const Login: React.FC = () => {
       <div style={{ position: "absolute", left: "0", top: "0" }}>
         <SkBubble />
       </div>
+      {/* <img src={IMG_Shark} className={styles.shark} /> */}
     </div>
   )
 }

@@ -4,4 +4,4 @@ export function rand(min: number, max: number) {
 
 export const ease = 0.1;
 export const friction = 0.1;
-export const bubbleNum = 10;
+export const bubbleNum = 20;

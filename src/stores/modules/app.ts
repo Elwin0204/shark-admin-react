@@ -12,28 +12,28 @@ const {
 interface AppState {
   collapse: boolean;
   themeDrawerVisible: boolean;
+  mixSidebarFixed: boolean;
   isMobile: boolean;
   header: string;
   hasNetwork: boolean;
-  primaryColor: string;
   changeNetwork: (hasNetwork: boolean) => void;
-  setColor: (color: string) => void;
   toggleSidebar: (collapse: boolean) => void;
   setThemeDrawerVisible: (visible: boolean) => void;
+  toggleMixSidebarFixed: () => void;
 }
 
 const useAppStore = create<AppState>()(
-  (set) => ({
+  (set, get) => ({
     collapse: false,
     themeDrawerVisible: false,
+    mixSidebarFixed: false,
     isMobile: false,
     header: header,
     hasNetwork: true,
-    primaryColor: '#247fff',
     changeNetwork: (hasNetwork) => set(() => ({ hasNetwork: hasNetwork })),
-    setColor: (color) => set(() => ({ primaryColor: color })),
     toggleSidebar: (collapse) => set(() => ({ collapse: collapse })),
     setThemeDrawerVisible: (visible) => set(() => ({ themeDrawerVisible: visible })),
+    toggleMixSidebarFixed: () => set(() => ({ mixSidebarFixed: !get().mixSidebarFixed }))
   }),
 )
 

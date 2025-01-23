@@ -1,11 +1,11 @@
 import { createStyles } from 'antd-style'
 
 export default createStyles(({ token, css }) => {
-  const { baseSidebarWidth, baseTabsBarHeight, baseTabsBarZindex, baseHeaderHeight } = token;
+  const { baseSidebarWidth, baseTabsBarHeight, baseTabbarZindex, baseHeaderHeight } = token;
   return {
     appTabsBar: css`
       padding-left: ${baseSidebarWidth}px;
-      z-index: ${baseTabsBarZindex};
+      z-index: ${baseTabbarZindex};
       height: ${baseTabsBarHeight}px;
       position: absolute;
       left: 0;
