@@ -5,16 +5,12 @@
 import { create } from 'zustand' 
 import defaultSettings from '@/config/index'
 
-const {
-  header,
-} = defaultSettings
-
 interface AppState {
   collapse: boolean;
   themeDrawerVisible: boolean;
   mixSidebarFixed: boolean;
+  reloadFlag: boolean;
   isMobile: boolean;
-  header: string;
   hasNetwork: boolean;
   changeNetwork: (hasNetwork: boolean) => void;
   toggleSidebar: (collapse: boolean) => void;
@@ -27,8 +23,8 @@ const useAppStore = create<AppState>()(
     collapse: false,
     themeDrawerVisible: false,
     mixSidebarFixed: false,
+    reloadFlag: true,
     isMobile: false,
-    header: header,
     hasNetwork: true,
     changeNetwork: (hasNetwork) => set(() => ({ hasNetwork: hasNetwork })),
     toggleSidebar: (collapse) => set(() => ({ collapse: collapse })),

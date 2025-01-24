@@ -9,3 +9,7 @@ export const THEME_MODE_RECORDS: Record<UnionKey.ThemeMode, string> = {
   dark: 'solar:moon-sleep-outline',
   auto: 'material-symbols:brightness-auto-outline-rounded'
 };
+
+export const CONSOLE_INFO = "shark ฅ՞•ﻌ•՞ฅ";
+
+export const GRAYSCALE_CLS = 'grayscale';

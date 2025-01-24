@@ -1,34 +1,49 @@
-import { useEffect, useState } from 'react'
-import {
-  Outlet,
-} from 'react-router-dom'
-import Bus from 'event-bus-hooks'
 
-const SkAppMain: React.FC = () => {
-  const [routerView, setRouterView] = useState(true)
-  const reloadRouterView = () => {
-    setRouterView(false)
-    setTimeout(() => {
-      setRouterView(true)
-    }, 3000)
-  }
+import useBaseStyles from '@/assets/styles/base';
+import useStyles from "./style";
+import { KeepAlive, useKeepAliveRef } from "keepalive-for-react";
+import { useAppStore, useAuthStore, useThemeStore } from '@/stores';
 
-  useEffect(() => {
-    Bus.$on('reload-router-view', reloadRouterView)
-    return () => {
-      Bus.$off('reload-router-view')
+interface Props {
+  enablePadding?: boolean;
+}
+
+const SkAppMain: React.FC<Props> = ({ enablePadding = true }) => {
+  const { styles: baseStyles, cx } = useBaseStyles();
+  const { styles } = useStyles();
+  const location = useLocation();
+  const aliveRef = useKeepAliveRef();
+  const outlet = useOutlet();
+  const { cacheKeys, removeCacheKey } = useAuthStore();
+  const { reloadFlag } = useAppStore();
+  const { pageAnimate, pageAnimateMode } = useThemeStore();
+  const transitionName = pageAnimate ? pageAnimateMode : "";
+  const currentCacheKey = useMemo(() => {
+    return location.pathname + location.search;
+  }, [location.pathname, location.search]);
+
+  useUpdateEffect(() => {
+    if(aliveRef.current && removeCacheKey) {
+      aliveRef.current.destroy(removeCacheKey);
     }
-  }, [])
+  }, [removeCacheKey]);
+
+  useUpdateEffect(() => {
+    aliveRef.current?.refresh();
+  }, [reloadFlag]);
+
   return (
-    <>
-      {routerView && (
-        <div className='app-main-container'>
-          <div className='app-main-height'>
-            app main { JSON.stringify(routerView) }
-            <Outlet />
-          </div>
-        </div>)}
-    </>
+    <div className={cx(baseStyles.hFull, baseStyles.flexGrow, styles.appMainBg, enablePadding ? styles.appMainPadding : "")}>
+      <KeepAlive
+        aliveRef={aliveRef}
+        activeCacheKey={currentCacheKey}
+        max={18}
+        include={cacheKeys}
+        cacheNodeClassName={reloadFlag ? transitionName : ""}
+      >
+        {outlet}
+      </KeepAlive>
+    </div>
   )
 }
 

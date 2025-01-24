@@ -1,17 +1,15 @@
 import useBaseStyles from '@/assets/styles/base';
 import useStyles from "./style";
 import SkAppHeader from './components/SkAppHeader';
-import SkTabsBar from "./components/SkTabsBar";
+import SkTabsBar from "./components/SkTabBar";
 import SKSideBar from './components/SkSideBar';
 import SkAppFooter from "./components/SkAppFooter";
-import {
-  Outlet,
-} from 'react-router-dom';
 import { useAppStore, useThemeStore } from '@/stores';
 import { Suspense } from 'react';
 import SkThemeDrawer from '@/components/layouts/SkThemeDrawer';
 import SkMenu from '@/components/layouts/SkMenu';
 import MenuProvider from '../providers/MenuProvider';
+import SkAppMain from './components/SkAppMain';
 
 const BaseLayout: React.FC = () => {
   const { styles: baseStyles } = useBaseStyles();
@@ -64,7 +62,7 @@ const BaseLayout: React.FC = () => {
         <SKSideBar showLogo={showLogo} collapse={collapse} />
       </aside>}
       <main className={ cx(baseStyles.flexCol, baseStyles.flexGrow, baseStyles.transitionAll300, baseStyles.overflowYAuto, styles.appMain, leftGap) }>
-        <Outlet />
+        <SkAppMain />
       </main>
       {showFooter && (<>
           <footer className={ cx(baseStyles.wFull, baseStyles.flexShrink0, baseStyles.transitionAll300, styles.appFooter, leftGap) }>

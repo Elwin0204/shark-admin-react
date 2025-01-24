@@ -4,7 +4,7 @@
  */
 import { create } from 'zustand'
 import defaultSettings from '@/config/index'
-import { getDarkMode, getNextThemeMode } from '../shared/theme.util';
+import { getDarkMode, getNextThemeMode, toggleColorBlindnessMode, toggleGrayscaleMode } from '../shared/theme.util';
 
 const {
   layout,
@@ -15,7 +15,9 @@ const {
   showTabbar,
   showWatermark,
   watermarkText,
-  showFooter
+  showFooter,
+  pageAnimate,
+  pageAnimateMode
 } = defaultSettings
 
 export interface ThemeState {
@@ -23,7 +25,7 @@ export interface ThemeState {
   themeMode: UnionKey.ThemeMode;
   grayscale: boolean;
   colorBlindnessMode: boolean;
-  isDarkMode: boolean;
+  darkMode: boolean;
   primaryColor: string;
   inverted: boolean;
   baseHeaderZindex: number;
@@ -38,6 +40,7 @@ export interface ThemeState {
   baseSidebarMixWidth: number;
   baseSidebarMixChildWidth: number;
   baseSidebarVerticalMixWidth: number;
+  baseMainPadding: number;
   recommendColor: boolean;
   showWatermark: boolean;
   watermarkText: string;
@@ -46,6 +49,8 @@ export interface ThemeState {
   showTabbar: boolean;
   tabbarIcon: boolean;
   showFooter: boolean;
+  pageAnimate: boolean;
+  pageAnimateMode: UnionKey.PageAnimateMode;
   setLayout: (layout: UnionKey.LayoutMode) => void;
   setThemeMode: (themeMode?: UnionKey.ThemeMode) => void;
   setGrayscale: (enable: boolean) => void;
@@ -66,7 +71,7 @@ const useThemeStore = create<ThemeState>()(
     themeMode: themeMode as UnionKey.ThemeMode,
     grayscale: grayscale,
     colorBlindnessMode: colorBlindnessMode,
-    isDarkMode: getDarkMode(themeMode as UnionKey.ThemeMode),
+    darkMode: getDarkMode(themeMode as UnionKey.ThemeMode),
     primaryColor: '#247fff',
     inverted: false,
     baseHeaderZindex: 17,
@@ -81,6 +86,7 @@ const useThemeStore = create<ThemeState>()(
     baseSidebarMixWidth: 90,
     baseSidebarMixChildWidth: 200,
     baseSidebarVerticalMixWidth: 290,
+    baseMainPadding: 16,
     recommendColor: false,
     showWatermark: showWatermark,
     watermarkText: watermarkText,
@@ -89,17 +95,27 @@ const useThemeStore = create<ThemeState>()(
     showTabbar: showTabbar,
     tabbarIcon: true,
     showFooter: showFooter,
+    pageAnimate: pageAnimate,
+    pageAnimateMode: pageAnimateMode as UnionKey.PageAnimateMode,
     setLayout: (layout: UnionKey.LayoutMode) => set(() => ({ layout: layout })),
     setThemeMode: (themeMode?: UnionKey.ThemeMode)=> {
       if(themeMode) {
         set(() => ({ themeMode: themeMode }))
+        set(() => ({ darkMode: getDarkMode(themeMode as UnionKey.ThemeMode) }))
       } else {
         const newThemeMode = getNextThemeMode(get().themeMode);
         set(() => ({ themeMode: newThemeMode }))
+        set(() => ({ darkMode: getDarkMode(newThemeMode as UnionKey.ThemeMode) }))
       }
     },
-    setGrayscale: (enable: boolean) => set(() => ({ grayscale: enable })),
-    setColorBlindnessMode: (enable: boolean) => set(() => ({ colorBlindnessMode: enable })),
+    setGrayscale: (enable: boolean) => {
+      toggleGrayscaleMode(enable);
+      set(() => ({ grayscale: enable }));
+    },
+    setColorBlindnessMode: (enable: boolean) => {
+      toggleColorBlindnessMode(enable);
+      set(() => ({ colorBlindnessMode: enable }));
+    },
     setPrimaryColor: (color) => set(() => ({ primaryColor: color })),
     setRecommendColor: (enable: boolean) => set(() => ({ recommendColor: enable })),
     setShowWatermark: (visible: boolean) => set(() => ({ showWatermark: visible })),

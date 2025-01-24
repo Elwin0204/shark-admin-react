@@ -44,3 +44,7 @@ body {
 :not(:root):fullscreen::backdrop {
   display: none;
 }
+
+html.grayscale {
+  filter: grayscale(100%);
+}

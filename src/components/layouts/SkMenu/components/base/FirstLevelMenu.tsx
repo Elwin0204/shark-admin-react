@@ -20,7 +20,7 @@ interface MixMenuItemProps {
 
 function MixMenuItem(Props: MixMenuItemProps) {
   const { menu: { icon, label, key, children }, active, inverted, onClick, setActiveFirstLevelMenuKey } = Props;
-  const { isDarkMode, primaryColor } = useThemeStore();
+  const { darkMode, primaryColor } = useThemeStore();
   const navigator = useNavigate();
   const { styles: baseStyles, cx } = useBaseStyles();
   const { styles } = useStyles();
@@ -28,8 +28,8 @@ function MixMenuItem(Props: MixMenuItemProps) {
   const selectedBgColor = useMemo(() => {
     const light = transformColorWithOpacity(primaryColor, 0.1, '#ffffff');
     const dark = transformColorWithOpacity(primaryColor, 0.3, '#000000');
-    return isDarkMode ? dark : light;
-  }, [isDarkMode, primaryColor]);
+    return darkMode ? dark : light;
+  }, [darkMode, primaryColor]);
 
   function handleMixMenuClick() {
     setActiveFirstLevelMenuKey(key);

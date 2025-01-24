@@ -15,6 +15,8 @@ const theme = {
   showWatermark: false,
   watermarkText: "shark admin react",
   showFooter: true,
+  pageAnimate: true,
+  pageAnimateMode: 'fade-slide' as UnionKey.PageAnimateMode
 }
 
 export default theme

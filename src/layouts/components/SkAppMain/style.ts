@@ -1,13 +1,12 @@
 import { createStyles } from 'antd-style'
 
 export default createStyles(({ token, css }) => {
-  const { baseAppMainContainerHeight } = token
+  const { darkMode, baseMainPadding } = token
+  const contentBg = darkMode ? css`background: rgba(18, 18, 18, 1);` : css`background: rgba(255, 255, 255, 1);`
   return {
-    appMainContainer: css`
-      position: relative;
-      width: 100%;
-      height: ${baseAppMainContainerHeight()};
-      overflow: auto;
+    appMainPadding: css`
+      padding: ${baseMainPadding}px;
     `,
+    appMainBg: css`${contentBg};`
   }
 })

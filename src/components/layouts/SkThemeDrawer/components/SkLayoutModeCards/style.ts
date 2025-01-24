@@ -1,7 +1,8 @@
 import { createStyles } from 'antd-style'
 
 export default createStyles(({ token, css }) => {
-  const { colorPrimary, colorPrimaryBgHover, colorPrimaryBg } = token;
+  const { colorPrimary, colorPrimaryBgHover, colorPrimaryBg, darkMode } = token;
+  const cardShadow = darkMode ? "box-shadow: 0 0 5px 1px rgba(107, 114, 128, 0.625);" : "box-shadow: 0 0 5px 1px rgba(0,0,0,0.15);";
   return {
     layoutCards: css`
       position: relative;
@@ -78,7 +79,7 @@ export default createStyles(({ token, css }) => {
       cursor: pointer;
       border-radius: 4px;
       transition: all 0.2s;
-      box-shadow: 0 0 5px 1px rgba(0,0,0,0.15);
+      ${cardShadow};
       & .card-dark {
         background-color: ${colorPrimary}; 
         border-radius: 4px;

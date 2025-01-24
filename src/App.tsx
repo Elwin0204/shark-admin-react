@@ -5,6 +5,7 @@ import zhCN from 'antd/es/locale/zh_CN'
 import 'antd/dist/reset.css'
 import './App.css'
 import "@/assets/styles/reset.css"
+import "@/assets/styles/transition.css"
 import RouterGuard from './router/shared/routerGuard'
 import Router from "@/router/index"
 import SkLoading from '@/components/ui/SkLoading'

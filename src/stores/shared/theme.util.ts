@@ -1,4 +1,5 @@
-import { DARK_MODE_MEDIA_QUERY } from "@/const/app";
+import { DARK_MODE_MEDIA_QUERY, GRAYSCALE_CLS } from "@/const/app";
+import { toggleHtmlClass } from "@/utils";
 
 const themeSchemes: UnionKey.ThemeMode[] = ['light', 'dark', 'auto'];
 
@@ -11,10 +12,25 @@ export function getNextThemeMode(currentMode: UnionKey.ThemeMode): UnionKey.Them
 }
 
 export function getDarkMode(themeMode: UnionKey.ThemeMode) {
+  console.log("getDarkMode", themeMode, window.matchMedia(DARK_MODE_MEDIA_QUERY).matches)
   if (themeMode === 'dark') {
     return true;
   } else if (themeMode === 'light') {
     return false;
   }
   return window.matchMedia(DARK_MODE_MEDIA_QUERY).matches;
+}
+
+export function toggleGrayscaleMode(enable = false) {
+  const { add, remove } = toggleHtmlClass(GRAYSCALE_CLS);
+  if(enable) {
+    add();
+  } else {
+    remove();
+  }
+}
+
+export function toggleColorBlindnessMode(enable = false) {
+  const htmlElement = document.documentElement;
+  htmlElement.style.filter = enable ? 'invert(80%)' : '';
 }

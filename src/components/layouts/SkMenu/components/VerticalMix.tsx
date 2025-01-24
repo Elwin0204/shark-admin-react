@@ -8,10 +8,10 @@ const VerticalMixContent: React.FC = () => {
   const { styles: baseStyles, cx } = useBaseStyles();
   const { styles } = useStyles();
   const { childLevelMenus } = useMixMenuContext();
-  const { isDarkMode, inverted } = useThemeStore();
+  const { darkMode, inverted } = useThemeStore();
   const { mixSidebarFixed, toggleMixSidebarFixed } = useAppStore();
   const [drawerVisible, setDrawerVisible] = useState(false);
-  const mixInverted = !isDarkMode && inverted;
+  const mixInverted = !darkMode && inverted;
   const hasChild = childLevelMenus && childLevelMenus.length > 0;
   const showDrawer = hasChild && (drawerVisible || mixSidebarFixed);
 

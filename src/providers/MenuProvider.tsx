@@ -31,7 +31,7 @@ const MenuProvider: React.FC<Props> = ({ children }) => {
     [menus]
   );
   const childLevelMenus = useMemo(() => menus.find((item) => item.key === activeFirstLevelMenuKey)?.children as App.Menu[], [activeFirstLevelMenuKey, menus]);
-  console.log("123activeFirstLevelMenuKey", activeFirstLevelMenuKey);
+
   const mixMenuContext = {
     allMenus: menus,
     activeFirstLevelMenuKey: activeFirstLevelMenuKey,

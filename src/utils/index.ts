@@ -304,3 +304,23 @@ export function lazyMock (url: string) {
     })
   })
 }
+
+/**
+ * 新增,刪除className
+ *
+ * @param className
+ */
+export function toggleHtmlClass(className: string) {
+  function add() {
+    document.documentElement.classList.add(className);
+  }
+
+  function remove() {
+    document.documentElement.classList.remove(className);
+  }
+
+  return {
+    add,
+    remove
+  };
+}
