@@ -1,5 +1,5 @@
 // rootStore.ts
-import create from 'zustand';
+import { create } from 'zustand';
 import { combine } from 'zustand/middleware';
 import useAppStore from './app';
 import useTabStore from './tab';

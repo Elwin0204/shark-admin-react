@@ -12,8 +12,8 @@ const SkBubble: React.FC = () => {
   let mouseX = null;
   let mouseY = null;
   
-  let bubbles: Bubble[] = [];
-  let shapes: Shape[] = [];
+  const bubbles: Bubble[] = [];
+  const shapes: Shape[] = [];
 
   window.requestAnimationFrame = window.requestAnimationFrame ||
   function(cb) {
@@ -104,7 +104,7 @@ const SkBubble: React.FC = () => {
     }
   
     coll(i: number) {
-      let j = i;
+      const j = i;
       for(let i = 0; i < bubbles.length; i++) {
         if(j !== i) {
           const sumRadius = this.r + bubbles[i].r;

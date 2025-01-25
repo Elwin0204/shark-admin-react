@@ -1,6 +1,6 @@
 import { createStyles } from 'antd-style'
 
-export default createStyles(({ token, css }) => {
+export default createStyles(({ css }) => {
   return {
     hFull: css`
       height: 100%;

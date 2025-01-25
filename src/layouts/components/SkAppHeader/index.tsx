@@ -6,6 +6,7 @@ import SkThemeButton from '@/components/layouts/SkThemeButton';
 import SkThemeModeToggle from '@/components/layouts/SkThemeModeToggle';
 import { APP_HEADER_MENU_ID } from '@/const/app';
 import SkBreadcrumb from '@/components/layouts/SkBreadcrumb';
+import SkLang from '@/components/layouts/SkLang';
 
 const HeaderPropsMap = new Map<UnionKey.LayoutMode, App.HeaderProps>([
   [
@@ -59,6 +60,7 @@ const SkAppHeader: React.FC<Props> = ({ layout, breadcrumb }) => {
         { breadcrumb && breadcrumbVisible && <SkBreadcrumb /> }
       </div>
       <div className={ cx(baseStyles.hFull, baseStyles.flexYCenter, baseStyles.justifyEnd) }>
+        <SkLang />
         <SkThemeButton />
         <SkThemeModeToggle />
         <SkFullscreen />

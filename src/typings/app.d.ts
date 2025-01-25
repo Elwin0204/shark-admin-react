@@ -21,4 +21,6 @@ declare namespace App {
     collapseVisible: boolean;
     breadcrumbVisible: boolean;
   }
+
+  type LangOption = Record<UnionKey.LangKey, string>;
 }

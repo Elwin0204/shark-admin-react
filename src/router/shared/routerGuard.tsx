@@ -23,7 +23,6 @@ const RouterGuard = (props: { children: JSX.Element }) => {
     if (accessToken && authRoutes.length === 0) {
       console.log('Fetching permissions on initial load...');
       fetchPermissions().then(() => {
-        console.log('Permissions fetched successfully');
         setHasFetchedPermissions(true);
       }).catch((error) => {
         console.error('Failed to fetch permissions:', error);

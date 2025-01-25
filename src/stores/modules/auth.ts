@@ -36,9 +36,6 @@ const useAuthStore = create<AuthState>()(
         set(() => ({ authBtns }));
       } catch (error) {
         console.error('Failed to fetch permissions:', error);
-        // 处理错误，例如显示错误消息给用户
-      } finally {
-        console.log("兜底操作");
       }
     },
     resetAuth: () => {
