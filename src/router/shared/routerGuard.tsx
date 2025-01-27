@@ -1,4 +1,4 @@
-// import { pendingRequestManager } from "@/utils/pendingRequestManager";
+import { pendingRequestManager } from "@/utils/pendingRequestManager";
 import { useLocation, useNavigate } from "react-router-dom";
 import { rootRoutes } from "..";
 import { matchRoute } from "./routerUtils";
@@ -12,16 +12,20 @@ const RouterGuard = (props: { children: JSX.Element }) => {
   const navigator = useNavigate();
   const route = matchRoute(pathname, rootRoutes);
   console.log("RouterGuard", route);
-  // 跳转之前, 清除所有pending状态的请求
-  // pendingRequestManager.removeAllPending();
 
   // 状态变量用于跟踪是否已经尝试过获取权限
   const [hasFetchedPermissions, setHasFetchedPermissions] = useState(false);
 
+  // 跳转之前, 清除所有pending状态的请求
+  useEffect(() => {
+    if(hasFetchedPermissions) {
+      pendingRequestManager.removeAllPending();
+    }
+  }, [hasFetchedPermissions]);
+
   // 确保首次加载时获取权限
   useEffect(() => {
     if (accessToken && authRoutes.length === 0) {
-      console.log('Fetching permissions on initial load...');
       fetchPermissions().then(() => {
         setHasFetchedPermissions(true);
       }).catch((error) => {

@@ -1,0 +1,27 @@
+export default {
+  route: {
+    home: "Home",
+    form: "Form",
+    BasicForm: "Basic Form",
+    ValidateForm: "Validate Form",
+    DynamicForm: "Dynamic Form",
+    Result: "Result",
+    success: "Success Result",
+    fail: "Fail Result",
+    warning: "Warning Result",
+    info: "Info Result",
+    system: "System Management",
+    user: "User Management",
+    role: "Role Management",
+    menu: "Menu Management",
+    "multi-menu": "Multi-level Menu",
+    menu1: "Menu 1",
+    menu2: "Menu 2",
+    "menu1-1": "Menu 1-1",
+    "menu1-2": "Menu 1-2",
+    "menu1-3": "Menu 1-3",
+    "menu2-1": "Menu 2-1",
+    "menu1-3-1": "Menu 1-3-1",
+    "about": "About",
+  }
+};

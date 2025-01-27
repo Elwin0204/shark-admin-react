@@ -1,5 +1,5 @@
 import { useAppStore, useAuthStore, useTabStore } from "@/stores";
-import { getActiveFirstLevelMenuKey, getMenusByAuthRoutes, getOpenKeys } from "./utils/MenuUtils";
+import { getMenusByAuthRoutes, getOpenKeys } from "./utils/MenuUtils";
 import { MixMenuContext } from "@/layouts/context";
 
 interface Props {

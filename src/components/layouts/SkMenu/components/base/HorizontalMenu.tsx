@@ -36,7 +36,7 @@ const HorizontalMenu: React.FC<Props> = ({ mode }) => {
       onSelect={handleMenuSelect}
       selectedKeys={selectedKeys}
       className={cx(baseStyles.sizeFull, baseStyles.transitionAll300, styles.horizontalMenu)}
-      style={{border: '0 !important'}}
+      style={{borderBottom: 'none', background: 'none'}}
     />
   );
 }

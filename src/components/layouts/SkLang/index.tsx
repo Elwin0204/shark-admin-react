@@ -4,6 +4,7 @@ import { MenuProps } from "antd/es/menu";
 import useBaseStyles from '@/assets/styles/base';
 import useStyles from "./style";
 import { useAppStore } from "@/stores";
+import { setI18nLng } from "@/i18n";
 
 const { langOptions } = defaultSettings;
 
@@ -20,6 +21,7 @@ const SkLang: React.FC = () => {
 
   const onClick: MenuProps['onClick'] = ({ key }) => {
     setLang(key as UnionKey.LangKey);
+    setI18nLng(key as UnionKey.LangKey);
   };
 
   return (

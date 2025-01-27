@@ -1,0 +1,27 @@
+export default {
+  route: {
+    home: "Trang chủ",
+    form: "Biểu mẫu",
+    BasicForm: "Biểu mẫu cơ bản",
+    ValidateForm: "Kiểm tra Biểu mẫu",
+    DynamicForm: "Biểu mẫu động",
+    Result: "Kết quả",
+    success: "Kết quả Thành công",
+    fail: "Kết quả Thất bại",
+    warning: "Kết quả Cảnh báo",
+    info: "Kết quả Thông tin",
+    system: "Quản lý Hệ thống",
+    user: "Quản lý Người dùng",
+    role: "Quản lý Vai trò",
+    menu: "Quản lý Menu",
+    "multi-menu": "Menu nhiều cấp",
+    menu1: "Menu 1",
+    menu2: "Menu 2",
+    "menu1-1": "Menu 1-1",
+    "menu1-2": "Menu 1-2",
+    "menu1-3": "Menu 1-3",
+    "menu2-1": "Menu 2-1",
+    "menu1-3-1": "Menu 1-3-1",
+    "about": "Giới thiệu",
+  }
+};

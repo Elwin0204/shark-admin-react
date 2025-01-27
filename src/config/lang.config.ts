@@ -13,8 +13,8 @@ const lang: LangConfig = {
   langOptions: {
     'zh-CN': '中文简体',
     'zh-TW': '中文繁體',
-    en: 'English',
-    vi: 'Tiếng Việt',
+    'en': 'English',
+    'vi': 'Tiếng Việt',
   },
 };
 export default lang;

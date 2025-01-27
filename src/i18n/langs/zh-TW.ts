@@ -1,0 +1,27 @@
+export default {
+  route: {
+    home: "首頁",
+    form: "表單",
+    BasicForm: "基礎表單",
+    ValidateForm: "校驗表單",
+    DynamicForm: "動態表單",
+    Result: "結果",
+    success: "成功結果",
+    fail: "失敗結果",
+    warning: "警告結果",
+    info: "消息結果",
+    system: "系統管理",
+    user: "用戶管理",
+    role: "角色管理",
+    menu: "菜單管理",
+    "multi-menu": "多級菜單",
+    menu1: "菜單1",
+    menu2: "菜單2",
+    "menu1-1": "菜單1-1",
+    "menu1-2": "菜單1-2",
+    "menu1-3": "菜單1-3",
+    "menu2-1": "菜單2-1",
+    "menu1-3-1": "菜單1-3-1",
+    "about": "關於",
+  }
+};
