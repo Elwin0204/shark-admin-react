@@ -4,10 +4,10 @@ import useStyles from "./style";
 
 interface Props {
   showTitle: boolean;
-  className?: string;
+  className: string;
 }
 
-const SkLogo: React.FC<Props> = ({ className, showTitle = true }) => {
+const SkLogo: React.FC<Props> = ({ className, showTitle = true, ...props }) => {
   const { styles: baseStyles, cx } = useBaseStyles();
   const { styles } = useStyles();
   return (

@@ -5,9 +5,12 @@
 
 import { create } from 'zustand'
 import { createJSONStorage, persist } from "zustand/middleware"
-import { login } from '@/api/user'
+import { getUserProfile } from '@/api/user'
 import settings from '@/config/index'
 import { UserInfo } from '@/api/user/types'
+import useAuthStore from './auth'
+import { convertToRoutesAndBtns } from '@/router/shared/routerUtils'
+import { login } from '@/api/auth'
 
 const { title, tokenName } = settings
 
@@ -71,28 +74,50 @@ const useUserStore = create<UserState>()(
         }
       },
       login: async (params) => {
-        const { data } = await login(params)
-        const accessToken = data[tokenName]
+        const { data } = await login(params);
+        const accessToken = data[tokenName];
+
         if (accessToken) {
-          set(() => ({ accessToken: accessToken }))
-          // 登录成功后获取用户信息
-          await get().fetchUserInfo();
-          const hour = new Date().getHours()
-          const thisTime =
-            hour < 8
-              ? '早上好'
-              : hour <= 11
-              ? '上午好'
-              : hour <= 13
-              ? '中午好'
-              : hour < 18
-              ? '下午好'
-              : '晚上好'
-          window.$notification.success({ message: `欢迎登录${title}`, description: `${thisTime}!` });
+          set(() => ({ accessToken }));
+
+          try {
+            const { data: profile } = await getUserProfile();
+
+            set({
+              userInfo: profile.user,
+              roles: profile.roles,
+            });
+
+            const authRoutesFlat = profile.menus; // 返回扁平数组，每项 path 是完整路径
+
+            const { authRoutes, authBtns } = convertToRoutesAndBtns(authRoutesFlat);
+            useAuthStore.setState({ authRoutesFlat, authRoutes, authBtns });
+
+            const hour = new Date().getHours();
+            const thisTime =
+              hour < 8 ? '早上好' :
+              hour <= 11 ? '上午好' :
+              hour <= 13 ? '中午好' :
+              hour < 18 ? '下午好' : '晚上好';
+
+            window.$notification.success({
+              message: `欢迎登录${title}`,
+              description: `${thisTime}！${profile.user?.nickname || profile.user?.username}`
+            });
+
+            return accessToken;
+          } catch (error) {
+            // 处理 profile 请求失败（如 token 无效、网络错误）
+            console.error("login error: ", error);
+            window.$message.error({ content: '获取用户信息失败，请重新登录' });
+            // 可选：清除 token 并跳转到登录页
+            set(() => ({ accessToken: null, user: null }));
+            return null;
+          }
         } else {
           window.$message.error({ content: `登录接口异常，未正确返回${tokenName}...` });
+          return null;
         }
-        return accessToken
       },
       resetUser: () => {
         set(() => ({ accessToken: null, userInfo: null }));
@@ -110,3 +135,5 @@ const useUserStore = create<UserState>()(
 )
 
 export default useUserStore
+
+export const getUserStore = () => useUserStore.getState();

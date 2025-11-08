@@ -1,10 +1,31 @@
 import http from "@/utils/http";
-import { AuthMenuQuery } from "./types";
+import { encryptedData } from '@/utils/encrypt';
+import settings from '@/config/index';
 
-export function getAuthMenu(data: AuthMenuQuery) {
+const { loginRSA } = settings;
+
+export async function login(data: any) {
+  // if (loginRSA) {
+  //   data = await encryptedData(data);
+  // }
   return http.request({
-    url: '/auth/menu',
+    url: '/auth/login',
     method: 'post',
     data,
-  })
+  });
+}
+
+export function logout() {
+  return http.request({
+    url: '/auth/logout',
+    method: 'post',
+  });
+}
+
+export function register(data: any) {
+  return http.request({
+    url: '/auth/register',
+    method: 'post',
+    data,
+  });
 }

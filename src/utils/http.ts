@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { pendingRequestManager, PendingRequestManager } from "./pendingRequestManager";
 import defaultSettings from "@/config";
+import { getUserStore } from "@/stores/modules/user";
 
 const { invalidCode, noPermissionCode, noFoundCode, baseURL, requestTimeout, contentType } = defaultSettings;
 
@@ -106,10 +107,17 @@ class HttpClient {
       this.showLoading();
     }
 
-    this.pendingRequestManager.addPending(config);
+    const finalConfig = { ...config };
+    finalConfig.headers = finalConfig.headers || {};
 
-    config.headers!.Authorization = `Bearer ${localStorage.getItem("token")}`;
-    return config;
+    // ✅ 从 Zustand store 获取 accessToken（而不是 localStorage）
+    const { accessToken } = getUserStore();
+    if (accessToken && !finalConfig.headers['Authorization']) {
+      finalConfig.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+
+    this.pendingRequestManager.addPending(finalConfig);
+    return finalConfig;
   }
 
   private handleError(error: any) {

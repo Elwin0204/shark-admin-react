@@ -1,40 +1,19 @@
 import http from "@/utils/http";
-import { encryptedData } from '@/utils/encrypt'
-import settings from '@/config/index'
 
-const { loginRSA, tokenName } = settings
-
-export async function login(data: any) {
-  if (loginRSA) {
-    data = await encryptedData(data)
-  }
+export function getUserProfile() {
   return http.request({
-    url: '/login',
-    method: 'post',
-    data,
-  })
+    url: '/sys/users/profile',
+    method: 'get',
+  });
 }
 
-export function getUserInfo(accessToken: string) {
+// 用户列表
+export function fetchUserList(params?: Record<string, any>) {
   return http.request({
-    url: '/userInfo',
-    method: 'post',
-    data: {
-      [tokenName]: accessToken,
-    },
-  })
+    url: '/sys/users',
+    method: 'get',
+    params, // 支持查询参数
+  });
 }
 
-export function logout() {
-  return http.request({
-    url: '/logout',
-    method: 'post',
-  })
-}
-
-export function register() {
-  return http.request({
-    url: '/register',
-    method: 'post',
-  })
-}
+// 可继续添加：createUser, updateUser, deleteUser...

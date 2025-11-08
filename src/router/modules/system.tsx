@@ -7,6 +7,7 @@ import type { ExtendedRouteObject } from "@/typings/router";
 const systemRouter: Array<ExtendedRouteObject> = [
 	{
 		path: "/system",
+		key: "system",
 		element: <BaseLayout />,
 		meta: {
 			title: "系统管理"
@@ -14,6 +15,7 @@ const systemRouter: Array<ExtendedRouteObject> = [
 		children: [
 			{
 				path: "user",
+				key: "user",
 				element: lazyLoad(React.lazy(() => import("@/pages/system/user/index"))),
 				meta: {
 					auth: true,
@@ -22,6 +24,7 @@ const systemRouter: Array<ExtendedRouteObject> = [
 			},
 			{
 				path: "role",
+				key: "role",
 				element: lazyLoad(React.lazy(() => import("@/pages/system/role/index"))),
 				meta: {
 					auth: true,
@@ -30,6 +33,7 @@ const systemRouter: Array<ExtendedRouteObject> = [
 			},
 			{
 				path: "menu",
+				key: "menu",
 				element: lazyLoad(React.lazy(() => import("@/pages/system/menu/index"))),
 				meta: {
 					auth: true,

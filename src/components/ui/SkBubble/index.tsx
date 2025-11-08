@@ -12,8 +12,8 @@ const SkBubble: React.FC = () => {
   let mouseX = null;
   let mouseY = null;
   
-  const bubbles: Bubble[] = [];
-  const shapes: Shape[] = [];
+  let bubbles: Bubble[] = [];
+  let shapes: Shape[] = [];
 
   window.requestAnimationFrame = window.requestAnimationFrame ||
   function(cb) {
@@ -42,6 +42,7 @@ const SkBubble: React.FC = () => {
       const ctx = this.ctx;
       ctx.save();
       ctx.strokeStyle = "white";
+      // ctx.strokeStyle = "transparent";
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
       ctx.stroke();
@@ -98,13 +99,17 @@ const SkBubble: React.FC = () => {
     draw() {
       const ctx = this.ctx;
       ctx.beginPath();
-      ctx.fillStyle = this.c;
+      // ctx.fillStyle = this.c;
+      ctx.fillStyle = "transparent";
+      ctx.strokeStyle = "white";
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
       ctx.fill();
+      ctx.stroke();
+
     }
   
     coll(i: number) {
-      const j = i;
+      let j = i;
       for(let i = 0; i < bubbles.length; i++) {
         if(j !== i) {
           const sumRadius = this.r + bubbles[i].r;
@@ -195,7 +200,6 @@ const SkBubble: React.FC = () => {
       const render = createRender(ctx);
       // 初始化气泡
       for (let i = 0; i < bubbleNum; i++) {
-        // const b = new Bubble(ctx, canvasW / 2 + rand(-100, 100), canvasH / 2 + rand(-100, 100));
         const x = rand(0, canvasW);
         const y = rand(0, canvasH);
         const b = new Bubble(ctx, x, y);

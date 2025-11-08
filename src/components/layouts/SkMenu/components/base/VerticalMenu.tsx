@@ -33,7 +33,6 @@ const VerticalMenu = () => {
         className={cx(baseStyles.sizeFull, baseStyles.transitionAll300)}
         onSelect={handleMenuSelect}
         onOpenChange={onOpenChange}
-        style={{borderInlineEnd: "none", background: 'none'}}
       />
     </SkScrollbar>
   );

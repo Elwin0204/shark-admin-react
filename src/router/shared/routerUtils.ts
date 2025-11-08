@@ -62,7 +62,7 @@ export function convertToRoutesAndBtns(menuList: any[]): { authRoutes: ExtendedR
 
   // 创建所有节点的映射，并处理按钮权限
   menuList.forEach(item => {
-    if (item.type === 'btn') {
+    if (item.type === 'BTN') {
       authBtns.push(item.key || item.id);
     } else {
       const path = item.path === '/' ? '/' : item.path.startsWith('/') ? item.path : `/${item.path}`;
@@ -92,7 +92,7 @@ export function convertToRoutesAndBtns(menuList: any[]): { authRoutes: ExtendedR
   // 构建树结构
   const authRoutes: ExtendedRouteObject[] = [];
   menuList.forEach(item => {
-    if (item.type !== 'btn') {
+    if (item.type !== 'BTN') {
       const route = routeMap.get(item.id)!;
 
       if (item.parentId) {

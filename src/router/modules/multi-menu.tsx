@@ -7,6 +7,7 @@ import type { ExtendedRouteObject } from "@/typings/router";
 const multiMenuRouter: Array<ExtendedRouteObject> = [
 	{
 		path: "/multi-menu",
+    key: "multi-menu",
 		element: <BaseLayout />,
 		meta: {
 			title: "多级菜单"
@@ -14,6 +15,7 @@ const multiMenuRouter: Array<ExtendedRouteObject> = [
 		children: [
 			{
 				path: "menu1",
+        key: "menu1",
 				meta: {
 					auth: true,
 					title: "菜单1",
@@ -21,6 +23,7 @@ const multiMenuRouter: Array<ExtendedRouteObject> = [
         children: [
           {
             path: "menu1-1",
+            key: "menu1-1",
             element: lazyLoad(React.lazy(() => import("@/pages/multi-menu/menu11"))),
             meta: {
               auth: true,
@@ -29,6 +32,7 @@ const multiMenuRouter: Array<ExtendedRouteObject> = [
           },
           {
             path: "menu1-2",
+            key: "menu1-2",
             element: lazyLoad(React.lazy(() => import("@/pages/multi-menu/menu12"))),
             meta: {
               auth: true,
@@ -37,6 +41,7 @@ const multiMenuRouter: Array<ExtendedRouteObject> = [
           },
           {
             path: "menu1-3",
+            key: "menu1-3",
             meta: {
               auth: true,
               title: "菜单1-3",
@@ -44,6 +49,7 @@ const multiMenuRouter: Array<ExtendedRouteObject> = [
             children: [
               {
                 path: "menu1-3-1",
+                key: "menu1-3-1",
                 element: lazyLoad(React.lazy(() => import("@/pages/multi-menu/menu131"))),
                 meta: {
                   auth: true,
@@ -56,6 +62,7 @@ const multiMenuRouter: Array<ExtendedRouteObject> = [
 			},
 			{
 				path: "menu2",
+        key: "menu2",
 				meta: {
 					auth: true,
 					title: "菜单2",
@@ -63,6 +70,7 @@ const multiMenuRouter: Array<ExtendedRouteObject> = [
         children: [
           {
             path: "menu2-1",
+            key: "menu2-1",
             element: lazyLoad(React.lazy(() => import("@/pages/multi-menu/menu21"))),
             meta: {
               auth: true,

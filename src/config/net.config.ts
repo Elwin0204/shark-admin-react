@@ -5,12 +5,19 @@
 
 const network = {
   baseURL: import.meta.env.VITE_API_URL,
+  //  接口域名的管理，针对对接不同业务系统的情况
+  baseURLs: {
+    test: import.meta.env.VITE_API_URL,
+    baidu: import.meta.env.VITE_API_URL_BAIDU,
+    google: import.meta.env.VITE_API_URL_GOOGLE,
+  },
   // 文件服务地址
   fileURL: import.meta.env.VITE_FILE_URL,
   //配后端数据的接收方式application/json;charset=UTF-8或者application/x-www-form-urlencoded;charset=UTF-8
   contentType: 'application/json;charset=UTF-8',
   // 是否启用mock
-  isMock: true,
+  // isMock: true,
+  isMock: false,
   //消息框消失时间
   messageDuration: 3000,
   //最长请求时间

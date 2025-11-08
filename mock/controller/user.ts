@@ -4,6 +4,8 @@ const accessTokens = {
   test: 'Shark_TestToken',
 }
 
+type AccessTokensIndex = keyof typeof accessTokens;
+
 export default [
   {
     url: '/publicKey',
@@ -21,11 +23,11 @@ export default [
     },
   },
   {
-    url: '/login',
+    url: 'auth/login',
     type: 'post',
-    response(config) {
+    response(config: any) {
       const { username } = config.body
-      const accessToken = accessTokens[username]
+      const accessToken = accessTokens[username as AccessTokensIndex]
       if (!accessToken) {
         return {
           code: 500,
@@ -52,7 +54,7 @@ export default [
   {
     url: '/userInfo',
     type: 'post',
-    response(config) {
+    response(config: any) {
       const { accessToken } = config.body
       let permissions = ['admin']
       let username = 'admin'

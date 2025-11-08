@@ -1,7 +1,6 @@
 import AutoImport from "unplugin-auto-import/vite";
 import IconsResolve from "unplugin-icons/resolver";
 import type { Env } from "../../src/typings/env";
-import { antdResolver } from "./antd/antdResolver";
 
 export function setupAutoImport(viteEnv: Env.ImportMeta) {
   return AutoImport({
@@ -9,7 +8,7 @@ export function setupAutoImport(viteEnv: Env.ImportMeta) {
     include: [/\.[tj]sx?$/],
     dirs: ["src/hooks/**", "src/components/**"],
     exclude: [
-      /\/style\.ts$/, // 排除style.ts 文件
+      /[/\\]style\.ts$/i, // 👈 强化版排除
     ],
     dts: "src/typings/auto-imports.d.ts",
     resolvers: [
@@ -18,8 +17,6 @@ export function setupAutoImport(viteEnv: Env.ImportMeta) {
         extension: "tsx",
         customCollections: ["local"],
       }),
-      // todo: 不好使, 日后完善
-      // antdResolver({ prefix: 'A' })
     ],
   });
 }

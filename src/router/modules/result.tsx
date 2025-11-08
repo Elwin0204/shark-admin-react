@@ -7,6 +7,7 @@ import { ExtendedRouteObject } from "@/typings/router";
 const resultRouter: Array<ExtendedRouteObject> = [
 	{
     path: "/result",
+		key: "result",
 		element: <BaseLayout />,
 		meta: {
 			title: "结果 Result"
@@ -14,6 +15,7 @@ const resultRouter: Array<ExtendedRouteObject> = [
 		children: [
 			{
 				path: "success",
+				key: "success",
 				element: lazyLoad(React.lazy(() => import("@/pages/result/success/index"))),
 				meta: {
 					auth: true,
@@ -22,6 +24,7 @@ const resultRouter: Array<ExtendedRouteObject> = [
 			},
 			{
 				path: "fail",
+				key: "fail",
 				element: lazyLoad(React.lazy(() => import("@/pages/result/fail/index"))),
 				meta: {
 					auth: true,
@@ -30,6 +33,7 @@ const resultRouter: Array<ExtendedRouteObject> = [
 			},
 			{
 				path: "warning",
+				key: "warning",
 				element: lazyLoad(React.lazy(() => import("@/pages/result/warning/index"))),
 				meta: {
 					auth: true,
@@ -38,6 +42,7 @@ const resultRouter: Array<ExtendedRouteObject> = [
 			},
       {
 				path: "info",
+				key: "info",
 				element: lazyLoad(React.lazy(() => import("@/pages/result/info/index"))),
 				meta: {
 					auth: true,

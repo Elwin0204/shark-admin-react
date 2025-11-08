@@ -26,7 +26,6 @@ declare global {
   const SkColorPicker: typeof import('../components/layouts/SkColorPicker/index')['default']
   const SkDarkWrapper: typeof import('../components/ui/SkDarkWrapper/index')['default']
   const SkFullscreen: typeof import('../components/layouts/SkFullscreen/index')['default']
-  const SkLang: typeof import('../components/layouts/SkLang/index')['default']
   const SkLayoutModeCards: typeof import('../components/layouts/SkThemeDrawer/components/SkLayoutModeCards/index')['default']
   const SkLoading: typeof import('../components/ui/SkLoading/index')['default']
   const SkLogo: typeof import('../components/layouts/SkLogo/index')['default']

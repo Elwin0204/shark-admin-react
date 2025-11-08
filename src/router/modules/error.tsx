@@ -7,6 +7,7 @@ import { ExtendedRouteObject } from "@/typings/router";
 const errorRouter: Array<ExtendedRouteObject> = [
 	{
 		path: "/error/403",
+		key: "403",
 		element: lazyLoad(React.lazy(() => import("@/pages/error/403"))),
 		meta: {
 			auth: false,
@@ -15,6 +16,7 @@ const errorRouter: Array<ExtendedRouteObject> = [
 	},
 	{
 		path: "/error/404",
+		key: "404",
 		element: lazyLoad(React.lazy(() => import("@/pages/error/404"))),
 		meta: {
 			auth: false,
@@ -23,6 +25,7 @@ const errorRouter: Array<ExtendedRouteObject> = [
 	},
 	{
 		path: "/error/500",
+		key: "500",
 		element: lazyLoad(React.lazy(() => import("@/pages/error/500"))),
 		meta: {
 			auth: false,

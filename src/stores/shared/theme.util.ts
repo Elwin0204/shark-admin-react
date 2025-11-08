@@ -12,6 +12,7 @@ export function getNextThemeMode(currentMode: UnionKey.ThemeMode): UnionKey.Them
 }
 
 export function getDarkMode(themeMode: UnionKey.ThemeMode) {
+  console.log("getDarkMode", themeMode, window.matchMedia(DARK_MODE_MEDIA_QUERY).matches)
   if (themeMode === 'dark') {
     return true;
   } else if (themeMode === 'light') {

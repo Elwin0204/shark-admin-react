@@ -4,7 +4,7 @@ const menuList = [
     id: '10',
     parentId: '',
     type: 'menu',
-    key: 'home',
+    key: '10',
     title: '首页',
     icon: 'ant-design:home-outlined',
     sort: 0,

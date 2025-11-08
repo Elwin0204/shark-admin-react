@@ -7,6 +7,7 @@ import type { ExtendedRouteObject } from "@/typings/router";
 const formRouter: Array<ExtendedRouteObject> = [
 	{
 		path: "/form",
+		key: "form",
 		element: <BaseLayout />,
 		meta: {
 			title: "表单 Form"
@@ -14,6 +15,7 @@ const formRouter: Array<ExtendedRouteObject> = [
 		children: [
 			{
 				path: "basicForm",
+				key: "basicForm",
 				element: lazyLoad(React.lazy(() => import("@/pages/form/basicForm/index"))),
 				meta: {
 					auth: true,
@@ -22,6 +24,7 @@ const formRouter: Array<ExtendedRouteObject> = [
 			},
 			{
 				path: "validateForm",
+				key: "validateForm",
 				element: lazyLoad(React.lazy(() => import("@/pages/form/validateForm/index"))),
 				meta: {
 					auth: true,
@@ -30,6 +33,7 @@ const formRouter: Array<ExtendedRouteObject> = [
 			},
 			{
 				path: "dynamicForm",
+				key: "dynamicForm",
 				element: lazyLoad(React.lazy(() => import("@/pages/form/dynamicForm/index"))),
 				meta: {
 					auth: true,

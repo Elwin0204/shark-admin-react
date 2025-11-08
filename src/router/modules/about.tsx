@@ -8,6 +8,7 @@ import { ExtendedRouteObject } from "@/typings/router";
 const aboutRouter: Array<ExtendedRouteObject> = [
 	{
 		path: "/",
+		key: "aboutBase",
 		element: <BaseLayout />,
 		meta: {
 			auth: false,
@@ -16,6 +17,7 @@ const aboutRouter: Array<ExtendedRouteObject> = [
     children: [
       {
 				path: "about",
+				key: "about",
 				element: lazyLoad(React.lazy(() => import("@/pages/about/index"))),
 				meta: {
 					auth: true,

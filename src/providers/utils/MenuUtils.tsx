@@ -1,6 +1,5 @@
 import { ExtendedRouteObject } from "@/typings/router";
 import { buildFullPath } from "@/router/shared/routerUtils";
-import { $t } from "@/i18n";
 
 export function getMenusByAuthRoutes(routes: ExtendedRouteObject[], basePath = '', isNested = true): App.Menu[] {
   const menus: App.Menu[] = [];
@@ -37,13 +36,12 @@ export function getMenusByAuthRoutes(routes: ExtendedRouteObject[], basePath = '
 
 export function renderMenuByRoute(basePath: string, route: ExtendedRouteObject) {
   const fullPath = buildFullPath(basePath, route);
-  const { key } = route;
   const { title, icon } = route.meta ?? {};
 
   const menu: App.Menu = {
     key: fullPath,
     // label: <SkOverflowTooltip title={title} />,
-    label: $t(`route.${key}`, title!),
+    label: title,
     icon: (
       <SvgIcon icon={icon} style={{ fontSize: "18px" }} />
     ),
