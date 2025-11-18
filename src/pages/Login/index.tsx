@@ -9,40 +9,87 @@ import SkBubble from '@/components/ui/SkBubble'
 const Login: React.FC = () => {
   const { styles } = useStyles()
   const [form] = Form.useForm()
+  const [form2] = Form.useForm()
   const [loading, setLoading] = useState(false)
-  const { login } = useUserStore()
+  const [isRegister, setIsRegister] = useState(false)
+  const { login, register } = useUserStore()
   const navigator = useNavigate()
+
+  const switchForm = (value: boolean) => {
+    setIsRegister(value)
+  }
   
   const handleLogin = async (values: { username: string, password: string }) => {
     setLoading(true)
     login(values).then(res => {
       if (res) {
-        navigator('/')
+        navigator('/index')
       }
     }).finally(() => {
       setLoading(false)
     })
   }
+
+  const handleRegister = async (values: { username: string, password: string }) => {
+    setLoading(true)
+    register(values).then(res => {
+      if (res) {
+        navigator('/index')
+      }
+    }).finally(() => {
+      setLoading(false)
+    })
+  }
+  
   return (
     <div className={ styles.container }>
       <div className={ styles.dialog }>
-        <Form
-          form={form}
-          name="control-hooks"
-          onFinish={ handleLogin }
-          className={ styles.form }
-        >
-          <div className={ styles.titleTips }>欢迎来到shark-admin!</div>
-          <Form.Item className={ styles.formItem } style={ { marginTop: '40px' } } name="username" rules={[{ required: true }]}>
-            <Input placeholder="用户名: admin/editor" className={ styles.input } prefix={<UserOutlined />} />
-          </Form.Item>
-          <Form.Item className={ styles.formItem } name="password" rules={[{ required: true }]}>
-            <Input.Password placeholder="密码: 123456" className={ styles.input } prefix={<LockOutlined />} />
-          </Form.Item>
-          <Button type="primary" htmlType="submit" className={ styles.loginBtn } loading={ loading }>
-            登录
-          </Button>
-        </Form>
+        <div className={ styles.dialogInner }>
+          { isRegister ?
+            (<Form
+              key="register"
+              form={form2}
+              name="register-form"
+              onFinish={ handleRegister }
+              className={ styles.form }
+            >
+              <div className={ styles.titleTips }>注册</div>
+              <Form.Item className={ styles.formItem } style={ { marginTop: '40px' } } name="username" rules={[{ required: true }]}>
+                <Input placeholder="用户名: 英文字母数字下划线" className={ styles.input } prefix={<UserOutlined />} />
+              </Form.Item>
+              <Form.Item className={ styles.formItem } name="password" rules={[{ required: true }]}>
+                <Input.Password placeholder="密码: 不少于6位" className={ styles.input } prefix={<LockOutlined />} />
+              </Form.Item>
+              <Button type="primary" htmlType="submit" className={ styles.loginBtn } loading={ loading }>
+                注册
+              </Button>
+              <div className={styles.switchTip}>
+                已有账号？<a onClick={() => switchForm(false)}>立即登录</a>
+              </div>
+            </Form>) :
+            (<Form
+              key="login"
+              form={form}
+              name="login-form"
+              onFinish={ handleLogin }
+              className={ styles.form }
+            >
+              <div className={ styles.titleTips }>欢迎来到shark-admin!</div>
+              <Form.Item className={ styles.formItem } style={ { marginTop: '40px' } } name="username" rules={[{ required: true }]}>
+                <Input placeholder="用户名: admin/editor" className={ styles.input } prefix={<UserOutlined />} />
+              </Form.Item>
+              <Form.Item className={ styles.formItem } name="password" rules={[{ required: true }]}>
+                <Input.Password placeholder="密码: 123456" className={ styles.input } prefix={<LockOutlined />} />
+              </Form.Item>
+              <Button type="primary" htmlType="submit" className={ styles.loginBtn } loading={ loading }>
+                登录
+              </Button>
+              <div className={styles.switchTip}>
+                还没有账号？<a onClick={() => switchForm(true)}>立即注册</a>
+              </div>
+            </Form>)
+          }
+        </div>
       </div>
       <div className={ styles.waveContainer }>
         <svg

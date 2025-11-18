@@ -27,7 +27,7 @@ const useAuthStore = create<AuthState>()(
     removeCacheKey: null,
     setCurrentRoute: (route) => set(() => ({ currentRoute: route })),
     resetAuth: () => {
-      set(() => ({ authRoutes: [], authBtns: [] }));
+      set(() => ({ authRoutesFlat: [], authRoutes: [], authBtns: [] }));
     }
   })
 )

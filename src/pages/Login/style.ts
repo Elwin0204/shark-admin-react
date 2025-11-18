@@ -21,13 +21,34 @@ export default createStyles(({ token, css }) => ({
   `,
   dialog: {
     width: 450,
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backdropFilter: 'blur(100px)',
     borderRadius: 10,
     position: 'absolute',
     zIndex: '2',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    boxShadow: '0 8px 16px 0 rgba(128, 128, 128, 0.2)'
+  },
+  dialogInner: {
+    position: 'relative',
+    width: '100%',
+    height: '100%'
+  },
+  switchTip: {
+    textAlign: 'right',
+    marginTop: '12px',
+    fontSize: '14px',
+    color: '#000',
+    a: {
+      color: '#1890ff',
+      cursor: 'pointer',
+      textDecoration: 'none',
+      '&:hover': {
+        textDecoration: 'underline'
+      }
+    }
   },
   form: {
     position: 'relative',

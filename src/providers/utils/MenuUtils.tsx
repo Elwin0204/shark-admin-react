@@ -3,7 +3,7 @@ import { buildFullPath } from "@/router/shared/routerUtils";
 
 export function getMenusByAuthRoutes(routes: ExtendedRouteObject[], basePath = '', isNested = true): App.Menu[] {
   const menus: App.Menu[] = [];
-
+  
   routes.forEach((route) => {
     if (!route.meta?.hidden) {
       // 计算除去隐藏的子路由之后的可见子路由数量

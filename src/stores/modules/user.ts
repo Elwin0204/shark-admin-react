@@ -11,6 +11,7 @@ import { UserInfo } from '@/api/user/types'
 import useAuthStore from './auth'
 import { convertToRoutesAndBtns } from '@/router/shared/routerUtils'
 import { login } from '@/api/auth'
+import { publicRoutes } from '@/router/shared/publicRoutes'
 
 const { title, tokenName } = settings
 
@@ -25,9 +26,10 @@ interface UserState {
   setAvatar: (avatar: string[]) => void;
   setRoles: (roles: string[]) => void;
   getRoles: () => string[];
-  fetchUserInfo: () => Promise<string[] | boolean>;
   login: (params: { username: string, password: string }) => Promise<string>;
+  register: (params: { username: string, password: string }) => Promise<string>;
   resetUser: () => void;
+  restoreSession: () => Promise<boolean>;
 }
 
 const useUserStore = create<UserState>()(
@@ -38,39 +40,43 @@ const useUserStore = create<UserState>()(
       avatar: [],
       roles: [],
       setAccessToken: (token) => set(() => ({ accessToken: token })),
-      resetAccessToken: () => {
-        set(() => ({ accessToken: null, roles: [] }))
-      },
       setUserInfo: (userInfo) => set(() => ({ userInfo })),
       setAvatar: (avatar) => set(() => ({ avatar })),
       setRoles: (roles) => set(() => ({ roles })),
       getRoles: () => get().roles,
-      fetchUserInfo: async () => {
-        // 获取用户信息
-        const { data } = {
-          data: {
-            roles: ['admin'],
-            username: 'admin',
-            nickname: "nickname",
-            'avatar': [
-              'https://fastly.jsdelivr.net/gh/Elwin0204/sk-color-icons@master/icons/boy.svg',
-              'https://fastly.jsdelivr.net/gh/Elwin0204/sk-color-icons@master/icons/girl.svg',
-            ],
-          }
-        }
-        
-        if (!data) {
-          window.$message.info({ content: '验证失败，请重新登录...' });
-          return false
-        }
-        const { roles, username, nickname, avatar } = data
-        if (roles && username && Array.isArray(roles)) {
-          const userInfo = { username, nickname };
-          set(() => ({ roles, userInfo, avatar }))
-          return roles
-        } else {
-          window.$message.info({ content: '用户信息接口异常' });
-          return false
+      resetAccessToken: () => {
+        set({ accessToken: null, userInfo: null, roles: [] });
+        useAuthStore.getState().resetAuth(); // 同步清空权限
+      },
+      resetUser: function () {
+        get().resetAccessToken();
+      },
+      restoreSession: async () => {
+        const { accessToken } = get();
+        if (!accessToken) return false;
+
+        try {
+          const { data: profile } = await getUserProfile();
+
+          const { user, roles } = profile;
+          set({ userInfo: user, roles });
+
+          const authRoutesFlat = [...publicRoutes, ...profile.menus];
+
+          const { authRoutes, authBtns } = convertToRoutesAndBtns(authRoutesFlat);
+          useAuthStore.setState({
+            authRoutesFlat,
+            authRoutes,
+            authBtns
+          });
+
+          return true;
+        } catch (error) {
+          console.error('Session restore failed', error);
+          // 清除无效 token
+          get().resetAccessToken();
+          window.$message.warning('登录状态已失效，请重新登录');
+          return false;
         }
       },
       login: async (params) => {
@@ -88,7 +94,7 @@ const useUserStore = create<UserState>()(
               roles: profile.roles,
             });
 
-            const authRoutesFlat = profile.menus; // 返回扁平数组，每项 path 是完整路径
+            const authRoutesFlat = [...publicRoutes, ...profile.menus];
 
             const { authRoutes, authBtns } = convertToRoutesAndBtns(authRoutesFlat);
             useAuthStore.setState({ authRoutesFlat, authRoutes, authBtns });
@@ -119,8 +125,8 @@ const useUserStore = create<UserState>()(
           return null;
         }
       },
-      resetUser: () => {
-        set(() => ({ accessToken: null, userInfo: null }));
+      register: async (params) => {
+        return "";
       }
     }),
     {

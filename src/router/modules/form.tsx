@@ -14,27 +14,27 @@ const formRouter: Array<ExtendedRouteObject> = [
 		},
 		children: [
 			{
-				path: "basicForm",
-				key: "basicForm",
-				element: lazyLoad(React.lazy(() => import("@/pages/form/basicForm/index"))),
+				path: "basic-form",
+				key: "basic-form",
+				element: lazyLoad(React.lazy(() => import("@/pages/form/basic-form/index"))),
 				meta: {
 					auth: true,
 					title: "基础 Form",
 				}
 			},
 			{
-				path: "validateForm",
-				key: "validateForm",
-				element: lazyLoad(React.lazy(() => import("@/pages/form/validateForm/index"))),
+				path: "validate-form",
+				key: "validate-form",
+				element: lazyLoad(React.lazy(() => import("@/pages/form/validate-form/index"))),
 				meta: {
 					auth: true,
 					title: "校验 Form",
 				}
 			},
 			{
-				path: "dynamicForm",
-				key: "dynamicForm",
-				element: lazyLoad(React.lazy(() => import("@/pages/form/dynamicForm/index"))),
+				path: "dynamic-form",
+				key: "dynamic-form",
+				element: lazyLoad(React.lazy(() => import("@/pages/form/dynamic-form/index"))),
 				meta: {
 					auth: true,
 					title: "动态 Form",

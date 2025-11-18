@@ -59,7 +59,7 @@ export function matchRoute(pathname: string, routes: ExtendedRouteObject[]): Ext
 export function convertToRoutesAndBtns(menuList: any[]): { authRoutes: ExtendedRouteObject[], authBtns: string[] } {
   const routeMap = new Map<string, ExtendedRouteObject>();
   const authBtns: string[] = []; // 用于存储按钮权限
-
+  console.log("convertToRoutesAndBtns", menuList);
   // 创建所有节点的映射，并处理按钮权限
   menuList.forEach(item => {
     if (item.type === 'BTN') {

@@ -12,6 +12,7 @@ import SkLoading from '@/components/ui/SkLoading'
 import { ThemeProvider } from 'antd-style'
 import type { ThemeState } from '@/stores/modules/theme'
 import useSharkTheme from "@/hooks/theme"
+import { useUserStore } from './stores'
 
 declare module 'antd-style' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

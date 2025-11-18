@@ -15,6 +15,7 @@ Object.keys(metaRoutes).forEach((path) => {
 export const rootRoutes: ExtendedRouteObject[] = [
   {
     path: '/login',
+    key: 'login',
     element: <Login />,
     meta: {
       title: '登录',
@@ -31,11 +32,12 @@ export const rootRoutes: ExtendedRouteObject[] = [
     children: [
       {
         path: 'index',
+        key: 'index',
         element: <Index />,
         meta: {
           title: '首页',
           icon: 'home',
-          auth: true,
+          auth: false,
         }
       }
     ]

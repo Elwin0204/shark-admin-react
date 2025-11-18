@@ -9,7 +9,7 @@ import { mockXHR } from "@/utils/static.ts";
 //   mockXHR()
 // }
 
-ReactDOM.createRoot(document.getElementById('shark-admin')!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
